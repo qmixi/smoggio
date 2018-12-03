@@ -21967,12 +21967,12 @@ var Home = function Home() {
         _react2.default.createElement(
             'div',
             null,
-            'I\'m the home component'
+            'I\'m the home component!'
         ),
         _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                    return console.log('Hi there!');
+                    return console.log('Hi there! :)');
                 } },
             'Press me!'
         )

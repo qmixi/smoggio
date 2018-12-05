@@ -119,6 +119,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(8);
+
 var _server = __webpack_require__(4);
 
 var _Routes = __webpack_require__(7);
@@ -129,11 +131,15 @@ var _reactRouterDom = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (req) {
+exports.default = function (req, store) {
     var content = (0, _server.renderToString)(_react2.default.createElement(
-        _reactRouterDom.StaticRouter,
-        { context: {}, location: req.url },
-        _react2.default.createElement(_Routes2.default, null)
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(
+            _reactRouterDom.StaticRouter,
+            { context: {}, location: req.url },
+            _react2.default.createElement(_Routes2.default, null)
+        )
     ));
 
     return '\n        <html>\n            <head></head>\n            <body>\n                <div id="root">' + content + '</div>\n            </body>\n            <script src="bundle.js"></script>\n        </html>\n    ';
@@ -225,6 +231,12 @@ exports.default = function () {
             } })
     );
 };
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
 
 /***/ })
 /******/ ]);

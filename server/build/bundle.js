@@ -132,9 +132,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function () {
     var content = (0, _server.renderToString)(_react2.default.createElement(
         _reactRouterDom.StaticRouter,
-        null,
+        { context: {} },
         _react2.default.createElement(_Routes2.default, null)
     ));
+
     return '\n        <html>\n            <head></head>\n            <body>\n                <div id="root">' + content + '</div>\n            </body>\n            <script src="bundle.js"></script>\n        </html>\n    ';
 };
 

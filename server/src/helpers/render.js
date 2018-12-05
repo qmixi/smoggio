@@ -4,7 +4,12 @@ import Routes from '../client/Routes';
 import { StaticRouter } from 'react-router-dom'
 
 export default () => {
-    const content = renderToString(<StaticRouter><Routes /></StaticRouter>)
+    const content = renderToString(
+        <StaticRouter context={{}}>
+            <Routes />
+        </StaticRouter>
+    );
+
     return `
         <html>
             <head></head>

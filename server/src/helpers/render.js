@@ -5,7 +5,7 @@ import { StaticRouter } from 'react-router-dom'
 
 export default () => {
     const content = renderToString(
-        <StaticRouter context={{}}>
+        <StaticRouter context={{}} location={req.url}>
             <Routes />
         </StaticRouter>
     );

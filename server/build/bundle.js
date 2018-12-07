@@ -82,6 +82,12 @@ var _express = __webpack_require__(2);
 
 var _express2 = _interopRequireDefault(_express);
 
+var _reactRouterConfig = __webpack_require__(18);
+
+var _Routes = __webpack_require__(7);
+
+var _Routes2 = _interopRequireDefault(_Routes);
+
 var _render = __webpack_require__(3);
 
 var _render2 = _interopRequireDefault(_render);
@@ -99,7 +105,14 @@ app.use(_express2.default.static('public'));
 app.get('*', function (req, res) {
     var store = (0, _createStore2.default)();
 
-    res.send((0, _render2.default)(req, store));
+    var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
+        var route = _ref.route;
+
+        return route.loadData ? route.loadData(store) : null;
+    });
+    Promise.all(promises).then(function () {
+        res.send((0, _render2.default)(req, store));
+    });
 });
 
 app.listen(3000, function () {
@@ -131,11 +144,13 @@ var _reactRedux = __webpack_require__(8);
 
 var _server = __webpack_require__(4);
 
+var _reactRouterConfig = __webpack_require__(18);
+
+var _reactRouterDom = __webpack_require__(6);
+
 var _Routes = __webpack_require__(7);
 
 var _Routes2 = _interopRequireDefault(_Routes);
-
-var _reactRouterDom = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -146,7 +161,11 @@ exports.default = function (req, store) {
         _react2.default.createElement(
             _reactRouterDom.StaticRouter,
             { context: {}, location: req.url },
-            _react2.default.createElement(_Routes2.default, null)
+            _react2.default.createElement(
+                'div',
+                null,
+                (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
+            )
         )
     ));
 
@@ -217,8 +236,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(6);
-
 var _Home = __webpack_require__(5);
 
 var _Home2 = _interopRequireDefault(_Home);
@@ -229,14 +246,15 @@ var _UsersList2 = _interopRequireDefault(_UsersList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/users', component: _UsersList2.default })
-    );
-};
+exports.default = [{
+    path: '/',
+    component: _Home2.default,
+    exact: true
+}, {
+    loadData: _UsersList.loadData,
+    path: '/users',
+    component: _UsersList2.default
+}];
 
 /***/ }),
 /* 8 */
@@ -362,10 +380,11 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            _context.next = 2;
+                            console.log('test');
+                            _context.next = 3;
                             return _axios2.default.get('http://react-ssr-api.herokuapp.com/users');
 
-                        case 2:
+                        case 3:
                             res = _context.sent;
 
 
@@ -374,7 +393,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
                                 payload: res
                             });
 
-                        case 4:
+                        case 5:
                         case 'end':
                             return _context.stop();
                     }
@@ -404,6 +423,7 @@ module.exports = require("axios");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.loadData = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -473,6 +493,11 @@ function mapStateToProps(state) {
     };
 }
 
+function loadData(store) {
+    return store.dispatch((0, _actions.fetchUsers)());
+}
+
+exports.loadData = loadData;
 exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList);
 
 /***/ }),
@@ -480,6 +505,12 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actio
 /***/ (function(module, exports) {
 
 module.exports = require("babel-polyfill");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-config");
 
 /***/ })
 /******/ ]);

@@ -30,12 +30,7 @@ function mapStateToProps(state) {
     }
 }
 
-function loadData(store) {
-    return store.dispatch(fetchUsers());
-
-}
-
 export default {
-    loadData,
-    component: connect(mapStateToProps, { fetchUsers })(UsersList)    
+    loadData: ({ dispatch }) => dispatch(fetchUsers()),
+    component: connect(mapStateToProps, { fetchUsers })(UsersList)
 }

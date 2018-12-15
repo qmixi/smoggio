@@ -125,13 +125,6 @@ module.exports = require("react-redux");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.fetchUsers = exports.FETCH_USERS = undefined;
-
-var _axios = __webpack_require__(11);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -139,7 +132,7 @@ var FETCH_USERS = exports.FETCH_USERS = 'fetch_users';
 
 var fetchUsers = exports.fetchUsers = function fetchUsers() {
     return function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, getState, api) {
             var res;
             return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -147,7 +140,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
                         case 0:
                             console.log('test');
                             _context.next = 3;
-                            return _axios2.default.get('http://react-ssr-api.herokuapp.com/users');
+                            return api.get('/users');
 
                         case 3:
                             res = _context.sent;
@@ -166,7 +159,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
             }, _callee, undefined);
         }));
 
-        return function (_x) {
+        return function (_x, _x2, _x3) {
             return _ref.apply(this, arguments);
         };
     }();
@@ -193,6 +186,10 @@ var _express2 = _interopRequireDefault(_express);
 
 var _reactRouterConfig = __webpack_require__(1);
 
+var _expressHttpProxy = __webpack_require__(20);
+
+var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
+
 var _Routes = __webpack_require__(2);
 
 var _Routes2 = _interopRequireDefault(_Routes);
@@ -210,9 +207,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = (0, _express2.default)();
 
 app.use(_express2.default.static('public'));
+app.use('/api', (0, _expressHttpProxy2.default)('http://react-ssr-api.herokuapp.com', {
+    proxyReqOptRecorator: function proxyReqOptRecorator(opts) {
+        opts.header['x-forwarded-host'] = 'localhost:3000';
+        return opts;
+    }
+}));
 
 app.get('*', function (req, res) {
-    var store = (0, _createStore2.default)();
+    var store = (0, _createStore2.default)(req);
 
     var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
         var route = _ref.route;
@@ -453,14 +456,22 @@ var _reduxThunk = __webpack_require__(16);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _axios = __webpack_require__(11);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _reducers = __webpack_require__(17);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
-    var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+exports.default = function (req) {
+    var axiosInstance = _axios2.default.create({
+        baseURL: 'http://react-ssr-api.herokuapp.com',
+        headers: { cookie: req.get('cookie') || '' }
+    });
+    var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default.withExtraArgument(axiosInstance)));
     return store;
 };
 
@@ -523,6 +534,12 @@ exports.default = function () {
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("express-http-proxy");
 
 /***/ })
 /******/ ]);

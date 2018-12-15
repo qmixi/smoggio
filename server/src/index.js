@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.static('public'));
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
-    proxyReqOptRecorator(opts) {
+    proxyReqOptDecorator(opts) {
         opts.headers['x-forwarded-host'] = 'localhost:3000';
         return opts
     }

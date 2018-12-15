@@ -209,7 +209,7 @@ var app = (0, _express2.default)();
 app.use(_express2.default.static('public'));
 app.use('/api', (0, _expressHttpProxy2.default)('http://react-ssr-api.herokuapp.com', {
     proxyReqOptRecorator: function proxyReqOptRecorator(opts) {
-        opts.header['x-forwarded-host'] = 'localhost:3000';
+        opts.headers['x-forwarded-host'] = 'localhost:3000';
         return opts;
     }
 }));

@@ -2,17 +2,17 @@ import React from 'react';
 
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
-import {renderRoutes} from 'react-router-config';
+import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import serialize from "serialize-javascript";
 
 import Routes from '../client/Routes';
 
 
-export default (req, store) => {
+export default (req, store, context) => {
     const content = renderToString(
         <Provider store={store}>
-            <StaticRouter context={{}} location={req.url}>
+            <StaticRouter context={context} location={req.url}>
                 <div>{renderRoutes(Routes)}</div>
             </StaticRouter>
         </Provider>
@@ -20,7 +20,9 @@ export default (req, store) => {
 
     return `
         <html>
-            <head></head>
+            <head>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+            </head>
             <body>
                 <div id="root">${content}</div>
             </body>

@@ -28015,6 +28015,10 @@ var _UsersListPage = __webpack_require__(458);
 
 var _UsersListPage2 = _interopRequireDefault(_UsersListPage);
 
+var _NotFoundPage = __webpack_require__(483);
+
+var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [_extends({}, _App2.default, {
@@ -28023,7 +28027,7 @@ exports.default = [_extends({}, _App2.default, {
         exact: true
     }), _extends({}, _UsersListPage2.default, {
         path: '/users'
-    })]
+    }), _extends({}, _NotFoundPage2.default)]
 })];
 
 /***/ }),
@@ -28046,18 +28050,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Home = function Home() {
     return _react2.default.createElement(
         'div',
-        null,
+        { className: 'center-align', style: { marginTop: '200px' } },
         _react2.default.createElement(
-            'div',
+            'h3',
             null,
-            'I\'m the home component!'
+            'Welcome!'
         ),
         _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                    return console.log('Hi there! :)');
-                } },
-            'Press me!'
+            'p',
+            null,
+            'Check out my ssr app'
         )
     );
 };
@@ -29066,11 +29068,6 @@ var App = function App(_ref) {
         'div',
         null,
         _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(
-            'h1',
-            null,
-            'I\'m a header'
-        ),
         (0, _reactRouterConfig.renderRoutes)(route.routes)
     );
 };
@@ -29118,28 +29115,44 @@ var Header = function Header(_ref) {
     );
 
     return _react2.default.createElement(
-        'div',
+        'nav',
         null,
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
-        ),
-        _react2.default.createElement(
             'div',
-            null,
+            { className: 'nav-wrapper' },
             _react2.default.createElement(
                 _reactRouterDom.Link,
-                { to: '/users' },
-                'Users'
+                { to: '/', className: 'brand-logo' },
+                'SSR APP'
             ),
             _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/admins' },
-                'Admins'
+                'ul',
+                { className: 'right' },
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/users' },
+                        'Users'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/admins' },
+                        'Admins'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    authButton
+                )
             )
-        ),
-        authButton
+        )
     );
 };
 
@@ -29175,6 +29188,43 @@ exports.default = function () {
 };
 
 var _actions = __webpack_require__(179);
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotFoundPage = function NotFoundPage(_ref) {
+    var _ref$staticContext = _ref.staticContext,
+        staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;
+
+    staticContext.notFound = true;
+    return _react2.default.createElement(
+        "div",
+        { className: "center-align" },
+        _react2.default.createElement(
+            "h3",
+            null,
+            "Ooops, route not found."
+        )
+    );
+};
+
+exports.default = {
+    component: NotFoundPage
+};
 
 /***/ })
 /******/ ]);

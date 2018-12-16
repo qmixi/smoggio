@@ -104,6 +104,10 @@ var _UsersListPage = __webpack_require__(10);
 
 var _UsersListPage2 = _interopRequireDefault(_UsersListPage);
 
+var _NotFoundPage = __webpack_require__(24);
+
+var _NotFoundPage2 = _interopRequireDefault(_NotFoundPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [_extends({}, _App2.default, {
@@ -112,7 +116,7 @@ exports.default = [_extends({}, _App2.default, {
         exact: true
     }), _extends({}, _UsersListPage2.default, {
         path: '/users'
-    })]
+    }), _extends({}, _NotFoundPage2.default)]
 })];
 
 /***/ }),
@@ -263,7 +267,12 @@ app.get('*', function (req, res) {
         return route.loadData ? route.loadData(store) : null;
     });
     Promise.all(promises).then(function () {
-        res.send((0, _render2.default)(req, store));
+        var context = {};
+        var content = (0, _render2.default)(req, store, context);
+        if (context.notFound) {
+            res.status(404);
+        }
+        res.send(content);
     });
 });
 
@@ -303,18 +312,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Home = function Home() {
     return _react2.default.createElement(
         'div',
-        null,
+        { className: 'center-align', style: { marginTop: '200px' } },
         _react2.default.createElement(
-            'div',
+            'h3',
             null,
-            'I\'m the home component!'
+            'Welcome!'
         ),
         _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                    return console.log('Hi there! :)');
-                } },
-            'Press me!'
+            'p',
+            null,
+            'Check out my ssr app'
         )
     );
 };
@@ -448,13 +455,13 @@ var _Routes2 = _interopRequireDefault(_Routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (req, store) {
+exports.default = function (req, store, context) {
     var content = (0, _server.renderToString)(_react2.default.createElement(
         _reactRedux.Provider,
         { store: store },
         _react2.default.createElement(
             _reactRouterDom.StaticRouter,
-            { context: {}, location: req.url },
+            { context: context, location: req.url },
             _react2.default.createElement(
                 'div',
                 null,
@@ -463,7 +470,7 @@ exports.default = function (req, store) {
         )
     ));
 
-    return '\n        <html>\n            <head></head>\n            <body>\n                <div id="root">' + content + '</div>\n            </body>\n            <script>\n                window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + ' \n            </script>\n            <script src="bundle.js"></script>\n        </html>\n    ';
+    return '\n        <html>\n            <head>\n                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">\n            </head>\n            <body>\n                <div id="root">' + content + '</div>\n            </body>\n            <script>\n                window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + ' \n            </script>\n            <script src="bundle.js"></script>\n        </html>\n    ';
 };
 
 /***/ }),
@@ -617,11 +624,6 @@ var App = function App(_ref) {
         'div',
         null,
         _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(
-            'h1',
-            null,
-            'I\'m a header'
-        ),
         (0, _reactRouterConfig.renderRoutes)(route.routes)
     );
 };
@@ -669,28 +671,44 @@ var Header = function Header(_ref) {
     );
 
     return _react2.default.createElement(
-        'div',
+        'nav',
         null,
         _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
-        ),
-        _react2.default.createElement(
             'div',
-            null,
+            { className: 'nav-wrapper' },
             _react2.default.createElement(
                 _reactRouterDom.Link,
-                { to: '/users' },
-                'Users'
+                { to: '/', className: 'brand-logo' },
+                'SSR APP'
             ),
             _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/admins' },
-                'Admins'
+                'ul',
+                { className: 'right' },
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/users' },
+                        'Users'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouterDom.Link,
+                        { to: '/admins' },
+                        'Admins'
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    null,
+                    authButton
+                )
             )
-        ),
-        authButton
+        )
     );
 };
 
@@ -726,6 +744,43 @@ exports.default = function () {
 };
 
 var _actions = __webpack_require__(4);
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotFoundPage = function NotFoundPage(_ref) {
+    var _ref$staticContext = _ref.staticContext,
+        staticContext = _ref$staticContext === undefined ? {} : _ref$staticContext;
+
+    staticContext.notFound = true;
+    return _react2.default.createElement(
+        "div",
+        { className: "center-align" },
+        _react2.default.createElement(
+            "h3",
+            null,
+            "Ooops, route not found."
+        )
+    );
+};
+
+exports.default = {
+    component: NotFoundPage
+};
 
 /***/ })
 /******/ ]);

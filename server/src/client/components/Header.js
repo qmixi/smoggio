@@ -8,7 +8,7 @@ const Header = ({ auth }) => {
     return (
         <nav>
             <div className="nav-wrapper">
-                <Link to="/" className="brand-logo">SSR APP</Link>
+                <Link to="/" className="brand-logo">SSR APP!</Link>
                 <ul className="right">
                     <li><Link to="/users">Users</Link></li>
                     <li><Link to="/admins">Admins</Link></li>

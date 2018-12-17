@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
+import { Provider } from 'mobx-react';
 import { renderToString } from 'react-dom/server';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
@@ -10,9 +11,9 @@ import { Helmet } from 'react-helmet'
 import Routes from '../client/Routes';
 
 
-export default (req, store, context) => {
+export default (req, appstate, context) => {
     const content = renderToString(
-        <Provider store={store}>
+        <Provider appstate={appstate}>
             <StaticRouter context={context} location={req.url}>
                 <div>{renderRoutes(Routes)}</div>
             </StaticRouter>
@@ -32,7 +33,7 @@ export default (req, store, context) => {
                 <div id="root">${content}</div>
             </body>
             <script>
-                window.INITIAL_STATE = ${serialize(store.getState())} 
+                window.INITIAL_STATE = ${ JSON.stringify({ appstate: appstate.toJson() })};
             </script>
             <script src="bundle.js"></script>
         </html>

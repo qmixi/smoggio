@@ -11,9 +11,9 @@ import { Helmet } from 'react-helmet'
 import Routes from '../client/Routes';
 
 
-export default (req, appstate, context) => {
+export default (req, state, context) => {
     const content = renderToString(
-        <Provider appstate={appstate}>
+        <Provider {...state}>
             <StaticRouter context={context} location={req.url}>
                 <div>{renderRoutes(Routes)}</div>
             </StaticRouter>
@@ -21,6 +21,7 @@ export default (req, appstate, context) => {
     );
 
     const helmet = Helmet.renderStatic()
+    const initialState = state.appstate.toJson()
 
     return `
         <html>
@@ -33,7 +34,7 @@ export default (req, appstate, context) => {
                 <div id="root">${content}</div>
             </body>
             <script>
-                window.INITIAL_STATE = ${ JSON.stringify({ appstate: appstate.toJson() })};
+                window.INITIAL_STATE = ${ serialize({ appstate: state.appstate.toJson() })};
             </script>
             <script src="bundle.js"></script>
         </html>

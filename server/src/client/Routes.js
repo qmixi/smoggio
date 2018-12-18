@@ -15,6 +15,10 @@ export default [
                 path: '/',
                 exact: true
             },
+            // {
+            //     ...HomePage,
+            //     path: '/home/:id',
+            // },
             {
                 ...UsersListPage,
                 path: '/users'

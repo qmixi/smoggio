@@ -38,19 +38,20 @@ app.get('*', (req, res) => {
         }
     })
 
-    Promise.all(promises).then(() => {
-        const context = {};
-        const content = res.send(renderer(req, state, context))
-        if (context.url) {
-            // handle redirection
-            return res.redirect(301, context.url);
-        }
-        if (context.notFound) {
-            res.status(404);
-        }
-        res.send(content)
-    })
-    .catch(() => {})
+    Promise.all(promises)
+        .then(() => {
+            const context = {};
+            const content = renderer(req, state, context);
+            if (context.url) {
+                // handle redirection
+                return res.redirect(301, context.url);
+            }
+            if (context.notFound) {
+                res.status(404);
+            }
+            res.send(content);
+        })
+        .catch(() => { })
 });
 
 app.listen(3000, () => {

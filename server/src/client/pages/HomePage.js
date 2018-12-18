@@ -14,12 +14,11 @@ class Home extends Component {
     componentDidMount() {
         const { appstate } = this.props;
 
-        // appstate.fetchTasks()
-        // .then(tasks => {
-        //     console.log('tasks', tasks)
-        //     appstate.tasks = tasks
-        // })
-        // .catch(console.log)
+        appstate.fetchTasks()
+            .then(tasks => {
+                appstate.tasks = tasks
+            })
+            .catch(console.log)
 
     }
 
@@ -49,7 +48,6 @@ class Home extends Component {
 export default {
     component: Home,
     loadData: (state, params) => {
-        // console.log('CZAAA', state, 'params', params)
         return {
             promise: state.appstate.fetchTasks(),
             callback: data => { state.appstate.tasks = data }

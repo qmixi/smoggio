@@ -50,6 +50,7 @@ app.get('*', (req, res) => {
         }
         res.send(content)
     })
+    .catch(() => {})
 });
 
 app.listen(3000, () => {

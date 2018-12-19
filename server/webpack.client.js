@@ -10,6 +10,9 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')
+    },
+    node: {
+        fs: 'empty'
     }
 }
 

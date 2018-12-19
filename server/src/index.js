@@ -7,6 +7,7 @@ import Routes from './client/Routes'
 import renderer from './helpers/render';
 import createStore from './helpers/createStore';
 import AppState from './client/stores/appstate';
+require('dotenv').config()
 
 const app = express();
 
@@ -30,13 +31,16 @@ app.get('*', (req, res) => {
 
     const promises = matchRoutes(Routes, req.path).map(({ route, match }) => {
         return route.loadData ? route.loadData(state, match.params) : null
-    }).map(option => {
+    }).filter(option => !!option).map(option => {
+        console.log('option', option)
         if (option && option.promise) {
             return new Promise((resolve) => {
-                option.promise.then((data) => { option.callback(data); resolve() }).catch(resolve);
+                option.promise.then((data) => { option.callback(data); resolve() }).catch(() => {console.log('bla'); resolve});
             });
         }
     })
+
+    console.log('promises', promises)
 
     Promise.all(promises)
         .then(() => {
@@ -51,7 +55,7 @@ app.get('*', (req, res) => {
             }
             res.send(content);
         })
-        .catch(() => { })
+        .catch((err) => { console.log('wtf', err)})
 });
 
 app.listen(3000, () => {

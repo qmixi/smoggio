@@ -24,6 +24,7 @@
         "babel-preset-stage-1": "6.24.1",
         "compression": "1.7.0",
         "concurrently": "3.5.0",
+        "dotenv-webpack": "^1.5.7",
         "express": "4.15.4",
         "express-http-proxy": "1.0.6",
         "isomorphic-fetch": "^2.2.1",

@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import { action } from 'mobx';
 
 import { fetchTasks } from '../actions'
+import CoordsInput from '../components/CoordsInput'
 
 @inject('appstate')
 @observer
@@ -20,17 +21,34 @@ class Home extends Component {
             })
             .catch(console.log)
 
+        appstate.fetchInstalations()
+            .then(tasks => {
+                console.log('tssks', tasks)
+            })
+            .catch(console.log)
+
+    }
+
+    fetchCoords = address => {
+        console.log('address', address);
+        this.props.appstate.fetchGeocodingData(address)
+            .then(data => {
+                console.log('DATA ADDRESS', data)
+            })
+            .catch(console.log)
     }
 
     render() {
         // const [count, setCount] = useState(2);
         const { appstate } = this.props;
+        console.log('installations', appstate.instalations)
         // console.log('taskooo', appstate.tasks)
         return (
             <div className="center-align" style={{ marginTop: '200px' }}>
                 {/* <h3>Welcome!! Count: {count}</h3> */}
                 <h3>Welcome!! </h3>
                 <p>Check out my ssr app</p>
+                <CoordsInput fetchCoords={this.fetchCoords} />
                 {/* <button onClick={() => setCount(count + 1)}>Increment</button>
                 <button onClick={() => setCount(count - 1)}>Decrement</button> */}
                 <button onClick={this.addItem}>tak tak</button>
@@ -41,7 +59,7 @@ class Home extends Component {
                 <ul>
                     {appstate.tasks.map(item => <li key={item.id}>{item.title}</li>)}
                 </ul>
-            </div>
+            </div >
         )
     }
 }
@@ -49,8 +67,8 @@ export default {
     component: Home,
     loadData: (state, params) => {
         return {
-            promise: state.appstate.fetchTasks(),
-            callback: data => { state.appstate.tasks = data }
+            promise: state.appstate.fetchInstalations(),
+            callback: data => { state.appstate.instalations = data }
         }
     }
 }    

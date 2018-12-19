@@ -12,9 +12,6 @@ import axios from 'axios';
 import Routes from './Routes'
 import AppState from './stores/appstate'
 import reducers from './reducers';
-require('dotenv').config()
-
-console.log('process.emv', process.env)
 
 const axiosInstance = axios.create({
     baseURL: '/api'

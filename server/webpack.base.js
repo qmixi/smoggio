@@ -12,7 +12,7 @@ module.exports = {
                     cacheDirectory: true,
                     plugins: [
                         'transform-decorators-legacy',
-                        "transform-class-properties",
+                        "transform-class-properties"
                     ],
                     presets: ['es2015', 'react', 'stage-1', ['env', { targets: { browsers: 'last 2 versions' } }]]
                 }

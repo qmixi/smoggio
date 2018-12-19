@@ -41,7 +41,7 @@ class Home extends Component {
     render() {
         // const [count, setCount] = useState(2);
         const { appstate } = this.props;
-        console.log('installations', appstate.instalations)
+        console.log('installations', appstate.installations)
         // console.log('taskooo', appstate.tasks)
         return (
             <div className="center-align" style={{ marginTop: '200px' }}>
@@ -68,7 +68,7 @@ export default {
     loadData: (state, params) => {
         return {
             promise: state.appstate.fetchInstalations(),
-            callback: data => { state.appstate.instalations = data }
+            callback: data => { state.appstate.installations = data }
         }
     }
 }    

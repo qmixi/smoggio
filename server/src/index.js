@@ -10,7 +10,7 @@ import AppState from './client/stores/appstate';
 
 const app = express();
 
-app.use(express.static('public'));
+app.use('/static', express.static('public'));
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
     proxyReqOptDecorator(opts) {
         opts.headers['x-forwarded-host'] = 'localhost:3000';
@@ -24,11 +24,12 @@ app.get('*', (req, res) => {
     const appstate = new AppState();
     const state = {
         appstate
-    }
+    }    
     appstate.addItem('bar');
     appstate.addItem('foo');
 
-    const promises = matchRoutes(Routes, req.path).map(({ route, match }) => {
+    const components = matchRoutes(Routes, req.path);    
+    const promises = components.map(({ route, match }) => {
         return route.loadData ? route.loadData(state, match.params) : null
     })
         .filter(option => !!option)

@@ -2,8 +2,7 @@ import React from 'react';
 
 import App from './App';
 import HomePage from './pages/HomePage';
-import UsersListPage from './pages/UsersListPage';
-import AdminsListPage from './pages/AdminsListPage';
+import InstallationPage from './pages/InstallationPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 export default [
@@ -15,17 +14,9 @@ export default [
                 path: '/',
                 exact: true
             },
-            // {
-            //     ...HomePage,
-            //     path: '/home/:id',
-            // },
             {
-                ...UsersListPage,
-                path: '/users'
-            },
-            {
-                ...AdminsListPage,
-                path: '/admins'
+                ...InstallationPage,
+                path: '/installation/:id',
             },
             {
                 ...NotFoundPage

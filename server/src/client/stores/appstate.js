@@ -6,11 +6,13 @@ export default class AppState {
     @observable items = [];
     @observable tasks = [];
     @observable installations = [];
+    @observable stats = {};
 
-    constructor(initialState) {
-        this.items = initialState && initialState.appstate && initialState.appstate.items ? initialState.appstate.items : [];
-        this.tasks = initialState && initialState.appstate && initialState.appstate.tasks ? initialState.appstate.tasks : [];
-        this.installations = initialState && initialState.appstate && initialState.appstate.installations ? initialState.appstate.installations : [];
+    constructor(initialState = {}) {
+        this.items = initialState.appstate && initialState.appstate.items ? initialState.appstate.items : [];
+        this.tasks = initialState.appstate && initialState.appstate.tasks ? initialState.appstate.tasks : [];
+        this.installations = initialState.appstate && initialState.appstate.installations ? initialState.appstate.installations : [];
+        this.stats = initialState.appstate && initialState.appstate.stats ? initialState.appstate.stats : {};
     }
 
     @action
@@ -23,6 +25,14 @@ export default class AppState {
     @action
     fetchInstalations() {
         return fetch('https://airapi.airly.eu/v2/installations/nearest?lat=50.062006&lng=19.940984&maxDistanceKM=5&maxResults=3', { headers: { apikey: process.env.AIRLY_API_KEY } })
+            .then(resp => resp.json())
+            .catch(e => console.log(e));
+
+    }
+
+    @action
+    fetchStats(id) {
+        return fetch(`https://airapi.airly.eu/v2/measurements/installation?installationId=${id}`, { headers: { apikey: process.env.AIRLY_API_KEY } })
             .then(resp => resp.json())
             .catch(e => console.log(e));
 
@@ -42,7 +52,8 @@ export default class AppState {
     toJson() {
         return {
             items: this.items,
-            tasks: this.tasks && this.tasks.length ? this.tasks : []
+            tasks: this.tasks && this.tasks.length ? this.tasks : [],
+            stats: this.stats ? this.stats : {}
         };
     }
 }

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import { action } from 'mobx';
 
-import { fetchTasks } from '../actions'
-import CoordsInput from '../components/CoordsInput'
+import CoordsInput from '../../components/CoordsInput'
 
 @inject('appstate')
 @observer

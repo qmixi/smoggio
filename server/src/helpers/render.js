@@ -36,7 +36,7 @@ export default (req, state, context) => {
             <script>
                 window.INITIAL_STATE = ${ serialize({ appstate: state.appstate.toJson() })};
             </script>
-            <script src="bundle.js"></script>
+            <script src="/static/bundle.js"></script>
         </html>
     `;
 }

@@ -10,6 +10,10 @@ import CoordsInput from '../../components/CoordsInput'
 @observer
 class Home extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     addItem = () => this.props.appstate.addItem('tak tak')
 
     @action
@@ -31,7 +35,6 @@ class Home extends Component {
     }
 
     fetchCoords = address => {
-        console.log('address', address);
         this.props.appstate.fetchGeocodingData(address)
             .then(data => {
                 console.log('DATA ADDRESS', data)
@@ -40,15 +43,11 @@ class Home extends Component {
     }
 
     render() {
-        // const [count, setCount] = useState(2);
         const { appstate } = this.props;
         console.log('installations', appstate.installations)
-        // console.log('taskooo', appstate.tasks)
         return (
-            <div className="center-align home-page" style={{ marginTop: '200px' }}>
-                <div className="nav"></div>
-                {/* <h3>Welcome!! Count: {count}</h3> */}
-                <h3>Welcome!! </h3>
+            <div className="home-page">
+                <h3>Welcome!!</h3>
                 <p>Check out my ssr app</p>
                 <CoordsInput fetchCoords={this.fetchCoords} />
                 {/* <button onClick={() => setCount(count + 1)}>Increment</button>

@@ -1,0 +1,27 @@
+@import './colors';
+
+html, body {
+    margin: 0;
+    padding: 0;
+} 
+
+body {    
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;    
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.app {
+
+    &-row {
+        display: flex;
+    }
+
+    &-wrapper {
+        background: $gray_light;
+    }
+}

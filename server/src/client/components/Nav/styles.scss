@@ -1,6 +1,10 @@
+@import '../../colors';
+
 .nav {
-    background: violet;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    background: linear-gradient(45deg, $light, $dark);
+    min-height: 100vh;
+    
+    &-item {
+
+    }
 }

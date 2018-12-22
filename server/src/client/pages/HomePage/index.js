@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import { action } from 'mobx';
+import './styles.scss'
+import '../../components/Nav/styles.scss'
 
 import CoordsInput from '../../components/CoordsInput'
 
@@ -43,7 +45,8 @@ class Home extends Component {
         console.log('installations', appstate.installations)
         // console.log('taskooo', appstate.tasks)
         return (
-            <div className="center-align" style={{ marginTop: '200px' }}>
+            <div className="center-align home-page" style={{ marginTop: '200px' }}>
+                <div className="nav"></div>
                 {/* <h3>Welcome!! Count: {count}</h3> */}
                 <h3>Welcome!! </h3>
                 <p>Check out my ssr app</p>

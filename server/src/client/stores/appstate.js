@@ -23,8 +23,8 @@ export default class AppState {
     }
 
     @action
-    fetchInstalations() {
-        return fetch('https://airapi.airly.eu/v2/installations/nearest?lat=50.062006&lng=19.940984&maxDistanceKM=5&maxResults=3', { headers: { apikey: process.env.AIRLY_API_KEY } })
+    fetchInstalations(lat, lng) {
+        return fetch(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=5&maxResults=3`, { headers: { apikey: process.env.AIRLY_API_KEY } })
             .then(resp => resp.json())
             .catch(e => console.log(e));
 

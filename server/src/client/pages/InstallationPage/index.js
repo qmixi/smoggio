@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
+import { action } from 'mobx';
+import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 @inject('appstate')
 @observer
 class InstallationPage extends Component {
+
+    @action
     componentDidMount() {
-        
+        const { appstate, match: { params } } = this.props;
+
+        appstate.fetchStats(params.id)
+            .then(data => {
+                appstate.stats = data
+            })
+            .catch(console.log)
+
     }
 
     head() {
@@ -28,9 +39,9 @@ class InstallationPage extends Component {
                 Installation
 
                 Standards:
-                <ul>                    
-                    {this.props.appstate.stats.current.values.map(({name, value}) => <li key={name}>Name: {name}, Value: {value}</li>)}
-                </ul>       
+                {this.props.appstate.stats && <ul>
+                    {this.props.appstate.stats.current.values.map(({ name, value }) => <li key={name}>Name: {name}, Value: {value}</li>)}
+                </ul>}
             </div>
         );
     }
@@ -42,8 +53,8 @@ function mapStateToProps(state) {
     }
 }
 
-export default {    
-    component: InstallationPage,
+export default {
+    component: withRouter(InstallationPage),
     loadData: (state, params) => {
         console.log('params', params)
         return {

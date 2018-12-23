@@ -5,7 +5,6 @@ import proxy from 'express-http-proxy';
 
 import Routes from './client/Routes'
 import renderer from './helpers/render';
-import createStore from './helpers/createStore';
 import AppState from './client/stores/appstate';
 
 const app = express();
@@ -19,7 +18,6 @@ app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
 }))
 
 app.get('*', (req, res) => {
-    const store = createStore(req);
     // const stores    
     const appstate = new AppState();
     const state = {

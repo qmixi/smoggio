@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import { action } from 'mobx';
-import './styles.scss'
-import '../../components/Nav/styles.scss'
+import _ from 'lodash';
 
-import CoordsInput from '../../components/CoordsInput'
+import './styles.scss';
+import '../../components/Nav/styles.scss';
+import CoordsInput from '../../components/CoordsInput';
+import Installations from '../../components/Installations';
 
 @inject('appstate')
 @observer
@@ -14,62 +16,48 @@ class Home extends Component {
         super(props);
     }
 
-    addItem = () => this.props.appstate.addItem('tak tak')
-
-    @action
-    componentDidMount() {
-        const { appstate } = this.props;
-
-        appstate.fetchTasks()
-            .then(tasks => {
-                appstate.tasks = tasks
-            })
-            .catch(console.log)
-
-        appstate.fetchInstalations()
-            .then(tasks => {
-                console.log('tssks', tasks)
-            })
-            .catch(console.log)
-
-    }
+    addItem = () => this.props.appstate.addItem('tak tak');
 
     fetchCoords = address => {
         this.props.appstate.fetchGeocodingData(address)
             .then(data => {
-                console.log('DATA ADDRESS', data)
+                const coords = _.get(data, 'results[0].geometry.location', {})
+                const { lat, lng } = coords;
+                if (lat && lng) {
+                    this.props.appstate.fetchInstalations(lat, lng)
+                        .then(data => {
+                            this.props.appstate.installations = data;
+                            console.log('data', data)
+                        });
+                }
             })
             .catch(console.log)
     }
 
     render() {
-        const { appstate } = this.props;
-        console.log('installations', appstate.installations)
+        const { appstate: { installations } } = this.props;
+        console.log('installations', installations)
         return (
             <div className="home-page">
-                <h3>Welcome!!</h3>
-                <p>Check out my ssr app</p>
+                <div className="title home-page__title">Welcome! Let's check air condidtion in your city 🚀</div>
                 <CoordsInput fetchCoords={this.fetchCoords} />
-                {/* <button onClick={() => setCount(count + 1)}>Increment</button>
-                <button onClick={() => setCount(count - 1)}>Decrement</button> */}
-                <button onClick={this.addItem}>tak tak</button>
-                <ul>
-                    {appstate.items.map((item, key) => <li key={key}>{item}</li>)}
-                </ul>
-                <h3>Tasks: {appstate.tasks.length}</h3>
+                <Installations installations={installations} />
+
+
+                {/* <h3>Tasks: {appstate.tasks.length}</h3>
                 <ul>
                     {appstate.tasks.map(item => <li key={item.id}>{item.title}</li>)}
-                </ul>
+                </ul> */}
             </div >
         )
     }
 }
 export default {
     component: Home,
-    loadData: (state, params) => {
-        return {
-            promise: state.appstate.fetchInstalations(),
-            callback: data => { state.appstate.installations = data }
-        }
-    }
+    // loadData: (state, params) => {
+    //     return {
+    //         promise: state.appstate.fetchInstalations(),
+    //         callback: data => { state.appstate.installations = data }
+    //     }
+    // }
 }    

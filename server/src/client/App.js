@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import Nav from './components/Nav';
+
 import './styles.scss';
 
 const App = ({ route }) => {

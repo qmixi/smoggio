@@ -5,7 +5,8 @@ import proxy from 'express-http-proxy';
 
 import Routes from './client/Routes'
 import renderer from './helpers/render';
-import AppState from './client/stores/appstate';
+import InstallationsState from './client/stores/installationsState';
+import StatsState from './client/stores/statsState';
 
 const app = express();
 
@@ -18,15 +19,14 @@ app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
 }))
 
 app.get('*', (req, res) => {
-    // const stores    
-    const appstate = new AppState();
+    const installations = new InstallationsState();
+    const stats = new StatsState();
     const state = {
-        appstate
-    }    
-    appstate.addItem('bar');
-    appstate.addItem('foo');
+        installations,
+        stats
+    }
 
-    const components = matchRoutes(Routes, req.path);    
+    const components = matchRoutes(Routes, req.path);
     const promises = components.map(({ route, match }) => {
         return route.loadData ? route.loadData(state, match.params) : null
     })
@@ -34,10 +34,10 @@ app.get('*', (req, res) => {
         .map(option => {
             if (option && option.promise) {
                 return new Promise((resolve) => {
-                    option.promise.then((data) => { option.callback(data); resolve() }).catch(() => { console.log('bla'); resolve });
+                    option.promise.then((data) => { option.callback(data); resolve() }).catch(resolve);
                 });
             }
-        })        
+        })
 
     Promise.all(promises)
         .then(() => {

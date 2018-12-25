@@ -9,9 +9,20 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+@import './colors';
+
 .title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
+    font-size: 32px;        
+    margin: 10px 0 5px;
+    color: $text_dark
+}
+
+.subtitle {
+    font-size: 20px;
+    color: $dark;
+    margin-bottom: 60px;       
 }
 
 .app {

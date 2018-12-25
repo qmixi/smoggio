@@ -34,7 +34,7 @@ app.get('*', (req, res) => {
         .map(option => {
             if (option && option.promise) {
                 return new Promise((resolve) => {
-                    option.promise.then((data) => { option.callback(data); resolve() }).catch(resolve);
+                    option.promise.then((data) => { console.log("DATA", data); option.callback(data); resolve() }).catch(resolve);
                 });
             }
         })

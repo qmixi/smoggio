@@ -26,7 +26,7 @@ class Home extends Component {
                 const coords = _.get(data, 'results[0].geometry.location', {})
                 const { lat, lng } = coords;
                 if (lat && lng) {
-                    this.props.installations.fetchInstalations(lat, lng)
+                    this.props.installations.fetchInstallations(lat, lng)
                         .then(data => {
                             console.log('data', data)
                             this.props.installations.installations = data;
@@ -42,7 +42,7 @@ class Home extends Component {
         return (
             <div className="home-page">
                 <div className="title home-page__title">Welcome to Smoggio!</div>
-                <div className="home-page__subtitle">Let's check air condidtion in your city 🚀</div>
+                <div className="subtitle home-page__subtitle">Let's check air condidtion in your city 🚀</div>
                 <div className="home-page__coords-input">
                     <CoordsInput fetchCoords={this.fetchCoords} />
                 </div>

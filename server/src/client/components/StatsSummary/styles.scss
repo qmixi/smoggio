@@ -1,0 +1,27 @@
+@import '../../colors';
+
+.summary {
+    height: 60px;
+    padding: 20px;
+    color: white;
+
+    &--low {
+        background: $low;
+    }
+
+    &--medium {
+        background: $medium;
+    }
+
+    &--high {
+        background: $high;
+    }
+
+    &__value {
+
+    }
+
+    &__description {
+
+    }
+}

@@ -2,16 +2,28 @@ import { observable, action } from 'mobx';
 import "isomorphic-fetch";
 import _ from 'lodash';
 
+import { getHeader } from '../../helpers/utils'
+
 export default class InstallationsState {
     @observable installations = [];
+    @observable installation = [];
 
     constructor(initialState) {
         this.installations = _.get(initialState, 'installations.installations', []);
+        this.installation = _.get(initialState, 'installations.installation', {});
     }
 
     @action
-    fetchInstalations(lat, lng) {
-        return fetch(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=5&maxResults=10`, { headers: { apikey: process.env.AIRLY_API_KEY } })
+    fetchInstallations(lat, lng) {
+        return fetch(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=5&maxResults=10`, { headers: getHeader() })
+            .then(resp => resp.json())
+            .catch(e => console.log(e));
+
+    }
+
+    @action
+    fetchInstallation(id) {
+        return fetch(`https://airapi.airly.eu/v2/installations/${id}`, { headers: getHeader() })
             .then(resp => resp.json())
             .catch(e => console.log(e));
 
@@ -26,7 +38,8 @@ export default class InstallationsState {
 
     toJson() {
         return {
-            installations: this.installations ? this.installations : []
+            installations: this.installations ? this.installations : [],
+            installation: this.installation ? this.installation : {}
         };
     }
 }

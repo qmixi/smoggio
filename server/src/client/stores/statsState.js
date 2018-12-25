@@ -1,17 +1,18 @@
 import { observable, action } from 'mobx';
 import "isomorphic-fetch";
 import _ from 'lodash';
+import { getHeader } from '../../helpers/utils';
 
 export default class StatsState {
     @observable stats = {};
 
-    constructor(initialState) {        
+    constructor(initialState) {
         this.stats = _.get(initialState, 'stats.stats', {});
     }
 
     @action
     fetchStats(id) {
-        return fetch(`https://airapi.airly.eu/v2/measurements/installation?installationId=${id}`, { headers: { apikey: process.env.AIRLY_API_KEY } })
+        return fetch(`https://airapi.airly.eu/v2/measurements/installation?installationId=${id}`, { headers: getHeader() })
             .then(resp => resp.json())
             .catch(e => console.log(e));
 

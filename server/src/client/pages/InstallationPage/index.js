@@ -5,16 +5,27 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import _ from 'lodash';
 
-@inject('stats')
+import InstallationHeader from '../../components/InstallationHeader';
+import StatsSummary from '../../components/StatsSummary';
+import './styles.scss';
+
+@inject('stats', 'installations')
 @observer
 class InstallationPage extends Component {
 
     @action
     componentDidMount() {
-        const { stats, match: { params } } = this.props;
+        const { installations, stats, match: { params } } = this.props;
         stats.fetchStats(params.id)
             .then(data => {
+                console.log('STATS', data)
                 stats.stats = data
+            })
+            .catch(console.log)
+        installations.fetchInstallation(params.id)
+            .then(data => {
+                console.log('INSTALLATION', data)
+                installations.installation = data
             })
             .catch(console.log)
 
@@ -30,10 +41,18 @@ class InstallationPage extends Component {
     }
 
     render() {
+        const { installations: { installation }, stats: { stats } } = this.props;
+        console.log('installation', installation)
+        const summary = _.get(stats, 'current.indexes[0]', {});
+        console.log('summary', summary);
+
         return (
-            <div>
+            <div className="installation-page">
                 {this.head()}
-                Installation
+                <div className="installation-page__row">
+                    <InstallationHeader installation={installation} />
+                    <StatsSummary summary={summary} />
+                </div>
 
                 Standards:
                 {!_.isEmpty(this.props.stats.stats.current) && <ul>
@@ -48,8 +67,14 @@ export default {
     component: withRouter(InstallationPage),
     loadData: (state, params) => {
         return {
-            promise: state.stats.fetchStats(params.id),
-            callback: data => { state.stats.stats = data }
+            promise: Promise.all([
+                state.stats.fetchStats(params.id),
+                state.installations.fetchInstallation(params.id)
+            ]),
+            callback: data => {
+                state.stats.stats = data[0];
+                state.installations.installation = data[1];
+            }
         }
     }
 }

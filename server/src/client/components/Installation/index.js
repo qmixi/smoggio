@@ -8,7 +8,7 @@ const Installation = ({ installation: { id, address: { city, street, number } = 
         <Link to={`/installation/${id}`} className="installation">
             <div className="installation__city">{city}</div>
             <div className="installation__address">
-                <i className="fas fa-map-marker-alt"></i> ul. {street} {number}
+                <i className="fas fa-map-marker-alt"></i> {street} {number}
             </div>
         </Link>
 

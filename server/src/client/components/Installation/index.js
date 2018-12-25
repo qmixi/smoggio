@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Installation = ({ installation: { id, address: { city, street, number } = {} } }) =>
+const Installation = ({ installation: { id, address: { displayAddress1, displayAddress2, number } = {} } }) =>
     (
         <Link to={`/installation/${id}`} className="installation">
-            <div className="installation_address">
-                {city}, ul. {street} {number}
-            </div>
-            <div className="installation_description"></div>
+            <div className="installation_city">{displayAddress1}</div>
+            <div className="installation_address">ul. {displayAddress2} {number}</div>
         </Link>
 
     )

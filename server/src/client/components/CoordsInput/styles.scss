@@ -1,0 +1,53 @@
+@import '../../colors';
+
+.coords-input {
+    display: flex;
+
+    &__title {
+
+        &-tx {
+            font-size: 18px;
+            color: $text_dark;
+        }
+
+        &-sub {
+            color: $text_light;
+            font-size: 12px;
+        }
+    }
+
+    input {
+        background: transparent;
+        padding: 7px 10px;
+        height: 40px;
+        width: 30%;
+        min-width: 250px;
+        margin: 0px 20px;
+        border: 0;
+        border-bottom: 1px solid $dark;
+        outline: none;
+    }
+
+    button {
+        padding: 0 30px;
+        text-align: center;
+        background: $light;
+        border: 1px solid $light;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.2s ease-out;
+        height: 40px;
+        font-size: 14px;
+        cursor: pointer;
+        outline: none;
+
+        &:not(:disabled):hover {
+            background: $dark;
+            color: white;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}

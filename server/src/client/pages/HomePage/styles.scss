@@ -1,0 +1,22 @@
+@import '../../colors';
+
+.home-page {
+
+    &__title {
+        font-size: 32px;        
+        margin: 10px 0 5px;
+        color: $text_dark
+    }
+
+    &__subtitle {
+        font-size: 20px;
+        color: $dark;
+        margin-bottom: 60px;       
+    }
+
+    &__coords-input {
+        margin: 0 -25px;
+        padding: 25px;
+        background: white;
+    }    
+}

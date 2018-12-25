@@ -16,6 +16,10 @@ class Home extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.fetchCoords('Warszawa')
+    }
+
     fetchCoords = address => {
         this.props.installations.fetchGeocodingData(address)
             .then(data => {
@@ -24,6 +28,7 @@ class Home extends Component {
                 if (lat && lng) {
                     this.props.installations.fetchInstalations(lat, lng)
                         .then(data => {
+                            console.log('data', data)
                             this.props.installations.installations = data;
                         });
                 }
@@ -36,8 +41,11 @@ class Home extends Component {
         console.log('installations', installations)
         return (
             <div className="home-page">
-                <div className="title home-page__title">Welcome! Let's check air condidtion in your city 🚀</div>
-                <CoordsInput fetchCoords={this.fetchCoords} />
+                <div className="title home-page__title">Welcome to Smoggio!</div>
+                <div className="home-page__subtitle">Let's check air condidtion in your city 🚀</div>
+                <div className="home-page__coords-input">
+                    <CoordsInput fetchCoords={this.fetchCoords} />
+                </div>
                 <Installations installations={installations} />
             </div >
         )

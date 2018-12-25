@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Installation from '../Installation';
+import './styles.scss';
 
 const Nav = ({ installations }) => (
     <div className="installations">

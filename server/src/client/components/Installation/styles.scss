@@ -1,0 +1,28 @@
+@import '../../colors';
+
+.installation {
+    background: white;
+    display: block;
+    padding: 20px 40px;
+    box-shadow: 0px 0px 61px 6px #e5e5e5;
+    margin: 20px;
+    transition: all 0.2s ease-out;
+    text-decoration: none;
+    width: 17.5%;
+    box-sizing: content-box;
+
+    &__city {
+        color: $text_light;
+        margin-bottom: 5px;
+    } 
+
+    &__address {
+        color: $dark;
+
+        i {
+            font-size: 13px;
+            position: relative;
+            top: -1px;        
+        }
+    }
+}

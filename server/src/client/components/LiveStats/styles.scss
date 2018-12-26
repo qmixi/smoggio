@@ -1,0 +1,68 @@
+@import '../../colors';
+
+@keyframes live {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.stats-live {
+    margin: 0 -20px;
+    padding: 20px;
+    background: white;
+
+    &__title {
+        position: relative;
+        margin-left: 16px;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: live 2s linear infinite;
+            background: $high;
+            border-radius: 50%;
+            left: -15px;
+            top: 11px;
+        }
+    }
+
+    &__list {
+        max-width: 480px;
+        margin-top: 20px;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $text_light;                             
+        padding: 10px;
+        padding: 8px 17px;
+
+        &-title {
+            color: $text_dark;
+        }
+
+        &-value {
+            color: $text_dark;
+            font-weight: bold;
+        }
+
+        &-unit {
+            margin-left: 5px;
+            color: $text_light;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+}  

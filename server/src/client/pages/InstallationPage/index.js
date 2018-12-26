@@ -7,6 +7,8 @@ import _ from 'lodash';
 
 import InstallationHeader from '../../components/InstallationHeader';
 import StatsSummary from '../../components/StatsSummary';
+import LiveStats from '../../components/LiveStats';
+import HistoricalStats from '../../components/HistoricalStats';
 import './styles.scss';
 
 @inject('stats', 'installations')
@@ -44,7 +46,11 @@ class InstallationPage extends Component {
         const { installations: { installation }, stats: { stats } } = this.props;
         console.log('installation', installation)
         const summary = _.get(stats, 'current.indexes[0]', {});
-        console.log('summary', summary);
+        const liveValues = _.get(stats, 'current.values', []);
+        const historyValues = _.get(stats, 'history', []);
+        const forecastValues = _.get(stats, 'forecast', []);
+        console.log('LIVEVALUES', historyValues)
+        // const hist
 
         return (
             <div className="installation-page">
@@ -53,11 +59,8 @@ class InstallationPage extends Component {
                     <InstallationHeader installation={installation} />
                     <StatsSummary summary={summary} />
                 </div>
-
-                Standards:
-                {!_.isEmpty(this.props.stats.stats.current) && <ul>
-                    {this.props.stats.stats.current.values.map(({ name, value }) => <li key={name}>Name: {name}, Value: {value}</li>)}
-                </ul>}
+                <LiveStats values={liveValues} />
+                <HistoricalStats history={historyValues} forecast={forecastValues} />
             </div>
         );
     }

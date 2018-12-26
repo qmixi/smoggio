@@ -1,0 +1,23 @@
+@import '../../colors';
+
+.history {
+    margin-top: 20px;
+
+    &__chart {
+        max-width: 800px;
+        margin-top: 30px;
+    }
+
+    &__title {
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+
+    &__temperature {
+        margin-top: 30px;
+
+        &-title {
+            color: $light;
+        }
+    }
+} 

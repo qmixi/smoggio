@@ -10,7 +10,7 @@ const InstallationHeader = (
         <div>
             <div className="title">{city}, {street} {number}</div>
             <div className="subtitle">
-                {description}: {name} 
+                {!!description && <span>{description}:</span>} {name}
             </div>
         </div>
 

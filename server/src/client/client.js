@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { renderRoutes } from 'react-router-config';
+import { CookiesProvider } from 'react-cookie';
 
 import Routes from './Routes'
 import InstallationsState from './stores/installationsState'
@@ -19,9 +20,11 @@ const state = {
 
 ReactDOM.hydrate(
     <Provider {...state}>
-        <BrowserRouter>
-            <div>{renderRoutes(Routes)}</div>
-        </BrowserRouter>
+        <CookiesProvider>
+            <BrowserRouter>
+                <div>{renderRoutes(Routes)}</div>
+            </BrowserRouter>
+        </CookiesProvider>
     </Provider>,
     document.querySelector('#root')
 );

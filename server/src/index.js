@@ -2,6 +2,8 @@ import 'babel-polyfill';
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
 import proxy from 'express-http-proxy';
+const cookiesMiddleware = require('universal-cookie-express');
+
 
 import Routes from './client/Routes'
 import renderer from './helpers/render';
@@ -11,6 +13,7 @@ import StatsState from './client/stores/statsState';
 const app = express();
 
 app.use('/static', express.static('public'));
+app.use(cookiesMiddleware());
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
     proxyReqOptDecorator(opts) {
         opts.headers['x-forwarded-host'] = 'localhost:3000';

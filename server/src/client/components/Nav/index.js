@@ -14,7 +14,7 @@ const Nav = () => (
             <div className="nav-item__icon">
                 <i className="fas fa-heart"></i>
             </div>
-            <div className="nav-item__title">Favourites</div>
+            <div className="nav-item__title">Favorites</div>
         </Link>
 
     </div>

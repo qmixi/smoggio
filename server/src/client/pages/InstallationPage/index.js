@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 import InstallationHeader from '../../components/InstallationHeader';
 import StatsSummary from '../../components/StatsSummary';
+import FavoriteIndicator from '../../components/FavoriteIndicator';
 import LiveStats from '../../components/LiveStats';
 import HistoricalStats from '../../components/HistoricalStats';
 import './styles.scss';
@@ -57,7 +58,10 @@ class InstallationPage extends Component {
                 {this.head()}
                 <div className="installation-page__row">
                     <InstallationHeader installation={installation} />
-                    <StatsSummary summary={summary} />
+                    <div>
+                        <FavoriteIndicator installation={installation.id}/>
+                        <StatsSummary summary={summary} />
+                    </div>
                 </div>
                 <LiveStats values={liveValues} />
                 <HistoricalStats history={historyValues} forecast={forecastValues} />

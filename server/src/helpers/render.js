@@ -5,6 +5,7 @@ import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import serialize from "serialize-javascript";
 import { Helmet } from 'react-helmet'
+import { CookiesProvider } from 'react-cookie';
 
 import Routes from '../client/Routes';
 
@@ -12,9 +13,11 @@ import Routes from '../client/Routes';
 export default (req, state, context) => {
     const content = renderToString(
         <Provider {...state}>
-            <StaticRouter context={context} location={req.url}>
-                <div>{renderRoutes(Routes)}</div>
-            </StaticRouter>
+            <CookiesProvider cookies={req.universalCookies}>
+                <StaticRouter context={context} location={req.url}>
+                    <div>{renderRoutes(Routes)}</div>
+                </StaticRouter>
+            </CookiesProvider>
         </Provider>
     );
 

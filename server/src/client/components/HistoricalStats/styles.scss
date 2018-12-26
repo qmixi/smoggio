@@ -3,6 +3,12 @@
 .history {
     margin-top: 20px;
 
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
     &__chart {
         max-width: 800px;
         margin-top: 30px;

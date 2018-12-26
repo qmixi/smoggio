@@ -67,8 +67,8 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
         <div className="history">
             <div className="history__row">
                 <div className="title history__title title title--small">{title} stats</div>
-                {isHistory && <div className="" onClick={() => setType('forecast')}>Forecast</div>}
-                {!isHistory && <div className="" onClick={() => setType('history')}>History</div>}
+                {isHistory && <button className="" onClick={() => setType('forecast')}>Forecast</button>}
+                {!isHistory && <button className="" onClick={() => setType('history')}>History</button>}
             </div>
 
             <div className="subtitle history__title title title--small">AIRLY CAQI</div>

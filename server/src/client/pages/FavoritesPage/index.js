@@ -16,7 +16,6 @@ class Favourites extends Component {
 
     constructor(props) {
         super(props);
-        console.log('props', props);
     }
 
     componentDidMount() {
@@ -31,7 +30,6 @@ class Favourites extends Component {
                 if (lat && lng) {
                     this.props.installations.fetchInstallations(lat, lng)
                         .then(data => {
-                            console.log('data', data)
                             this.props.installations.installations = data;
                         });
                 }
@@ -40,20 +38,30 @@ class Favourites extends Component {
     }
 
     render() {
-        const { installations: { installations } } = this.props;
-        console.log('installations', installations)
+        const { installations: { favs } } = this.props;
         return (
             <div className="home-page">
                 <div className="title home-page__title">Favoutires</div>
-                <div className="subtitle home-page__subtitle">Let's check air condidtion in your city 🚀</div>
-                <div className="home-page__coords-input">
-                    {/* <CoordsInput fetchCoords={this.fetchCoords} /> */}
-                </div>
-                {/* <Installations installations={installations} /> */}
+                <div className="subtitle home-page__subtitle">Here are your favorite installations 🔥</div>
+                <Installations installations={favs} />
             </div >
         )
     }
 }
 export default {
-    component: withCookies(Favourites)
+    component: withCookies(Favourites),
+    loadData: (state, params, cookies) => {
+        console.log('cookies', cookies);
+        const favs = cookies.get('favInstallations') || [];
+        console.log('favs', favs);
+
+        return {
+            promise: Promise.all(
+                favs.map(installation => state.installations.fetchInstallation(installation))
+            ),
+            callback: data => {
+                state.installations.favs = data;
+            }
+        }
+    }
 }    

@@ -29,9 +29,11 @@ app.get('*', (req, res) => {
         stats
     }
 
+    console.log('req.universalCookies', req.universalCookies)
+
     const components = matchRoutes(Routes, req.path);
     const promises = components.map(({ route, match }) => {
-        return route.loadData ? route.loadData(state, match.params) : null
+        return route.loadData ? route.loadData(state, match.params, req.universalCookies) : null
     })
         .filter(option => !!option)
         .map(option => {

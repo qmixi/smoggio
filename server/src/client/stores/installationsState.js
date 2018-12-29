@@ -7,10 +7,12 @@ import { getHeader } from '../../helpers/utils'
 export default class InstallationsState {
     @observable installations = [];
     @observable installation = [];
+    @observable favs = [];
 
     constructor(initialState) {
         this.installations = _.get(initialState, 'installations.installations', []);
         this.installation = _.get(initialState, 'installations.installation', {});
+        this.favs = _.get(initialState, 'installations.favs', []);
     }
 
     @action
@@ -39,7 +41,8 @@ export default class InstallationsState {
     toJson() {
         return {
             installations: this.installations ? this.installations : [],
-            installation: this.installation ? this.installation : {}
+            installation: this.installation ? this.installation : {},
+            favs: this.favs ? this.favs : {}
         };
     }
 }

@@ -71,7 +71,8 @@ class InstallationPage extends Component {
 
 export default {
     component: withRouter(InstallationPage),
-    loadData: (state, params) => {
+    loadData: (state, params, cookies) => {
+        console.log('cookies', cookies, cookies.get('favoriteInstallations'))        
         return {
             promise: Promise.all([
                 state.stats.fetchStats(params.id),

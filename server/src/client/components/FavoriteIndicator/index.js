@@ -3,26 +3,26 @@ import { withCookies, Cookies } from 'react-cookie';
 
 import './styles.scss';
 
-const FavoriteIndicator = ({ cookies, installation }) => {    
+const FavoriteIndicator = ({ cookies, installation }) => {
 
     const setFav = () => {
-        const favoriteInstallations = cookies.get('favoriteInstallations');
-        if (favoriteInstallations) {
-            const items = [...favoriteInstallations, installation];
-            cookies.set('favoriteInstallations', items)
-        }
+        const favoriteInstallations = cookies.get('favInstallations') || [];
+        const items = [...favoriteInstallations, installation];
+        cookies.set('favInstallations', items, {path: '/'})
     }
+
 
     const removeFav = () => {
-        const favoriteInstallations = cookies.get('favoriteInstallations');
+        const favoriteInstallations = cookies.get('favInstallations');
         if (favoriteInstallations) {
             const items = favoriteInstallations.filter(item => item !== installation);
-            cookies.set('favoriteInstallations', items)
+            cookies.set('favInstallations', items, {path: '/'})
         }
     }
 
-    const favs = cookies.get('favoriteInstallations');
+    const favs = cookies.get('favInstallations');
     const isFav = favs && favs.includes(installation);
+    console.log('isFav', isFav, 'cookies', cookies)
 
     return (
         <div className="favorite-indicator">

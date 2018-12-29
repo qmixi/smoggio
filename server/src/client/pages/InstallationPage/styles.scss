@@ -4,4 +4,13 @@
         display: flex;
         justify-content: space-between;
     }
+
+    &__info {
+        display: flex;
+    }
+
+    &__indicator {        
+        margin-top: 31px;
+        margin-right: 20px;
+    }
 }

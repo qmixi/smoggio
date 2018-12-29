@@ -45,21 +45,20 @@ class InstallationPage extends Component {
 
     render() {
         const { installations: { installation }, stats: { stats } } = this.props;
-        console.log('installation', installation)
         const summary = _.get(stats, 'current.indexes[0]', {});
         const liveValues = _.get(stats, 'current.values', []);
         const historyValues = _.get(stats, 'history', []);
         const forecastValues = _.get(stats, 'forecast', []);
-        console.log('LIVEVALUES', historyValues)
-        // const hist
 
         return (
             <div className="installation-page">
                 {this.head()}
                 <div className="installation-page__row">
                     <InstallationHeader installation={installation} />
-                    <div>
-                        <FavoriteIndicator installation={installation.id}/>
+                    <div className="installation-page__info">
+                        <div className="installation-page__indicator">
+                            <FavoriteIndicator installation={installation.id} />
+                        </div>
                         <StatsSummary summary={summary} />
                     </div>
                 </div>

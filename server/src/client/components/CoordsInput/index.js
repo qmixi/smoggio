@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './styles.scss';
 
-const CoordsInput = ({ fetchCoords }) => {
+const CoordsInput = ({ fetchCoords, fetchInstallations  }) => {
     const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        console.log('cza, cza')        
+        navigator.geolocation.getCurrentPosition((pos) => {
+            console.log('pos', pos)
+            fetchInstallations(pos.coords.latitude, pos.coords.longitude);            
+        })
+    }, []);
 
     return (
         <div className="coords-input">

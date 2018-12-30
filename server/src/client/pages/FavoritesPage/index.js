@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import { action } from 'mobx';
 import _ from 'lodash';
-import { withCookies, Cookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
 
 import './styles.scss';
 import '../../components/Nav/styles.scss';
@@ -19,7 +19,13 @@ class Favourites extends Component {
     }
 
     componentDidMount() {
-        // this.fetchCoords('Warszawa')
+        const { cookies, installations } = this.props;
+        const favs = cookies.get('favInstallations') || [];        
+        Promise.all(
+            favs.map(installation => installations.fetchInstallation(installation))
+        ).then(data => {
+            installations.favs = data;
+        });
     }
 
     fetchCoords = address => {
@@ -44,16 +50,14 @@ class Favourites extends Component {
                 <div className="title home-page__title">Favoutires</div>
                 <div className="subtitle home-page__subtitle">Here are your favorite installations 🔥</div>
                 <Installations installations={favs} />
-            </div >
+            </div>
         )
     }
 }
 export default {
     component: withCookies(Favourites),
     loadData: (state, params, cookies) => {
-        console.log('cookies', cookies);
         const favs = cookies.get('favInstallations') || [];
-        console.log('favs', favs);
 
         return {
             promise: Promise.all(

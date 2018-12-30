@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { withCookies, Cookies } from 'react-cookie';
+import React from 'react';
+import { withCookies } from 'react-cookie';
 
 import './styles.scss';
 
@@ -8,7 +8,7 @@ const FavoriteIndicator = ({ cookies, installation }) => {
     const setFav = () => {
         const favoriteInstallations = cookies.get('favInstallations') || [];
         const items = [...favoriteInstallations, installation];
-        cookies.set('favInstallations', items, {path: '/'})
+        cookies.set('favInstallations', items, { path: '/' })
     }
 
 
@@ -16,13 +16,12 @@ const FavoriteIndicator = ({ cookies, installation }) => {
         const favoriteInstallations = cookies.get('favInstallations');
         if (favoriteInstallations) {
             const items = favoriteInstallations.filter(item => item !== installation);
-            cookies.set('favInstallations', items, {path: '/'})
+            cookies.set('favInstallations', items, { path: '/' })
         }
     }
 
     const favs = cookies.get('favInstallations');
     const isFav = favs && favs.includes(installation);
-    console.log('isFav', isFav, 'cookies', cookies)
 
     return (
         <div className="favorite-indicator">

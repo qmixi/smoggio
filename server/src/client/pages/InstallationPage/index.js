@@ -50,6 +50,8 @@ class InstallationPage extends Component {
         const historyValues = _.get(stats, 'history', []);
         const forecastValues = _.get(stats, 'forecast', []);
 
+        console.log('installation', installation)
+
         return (
             <div className="installation-page">
                 {this.head()}
@@ -59,7 +61,7 @@ class InstallationPage extends Component {
                         <div className="installation-page__indicator">
                             <FavoriteIndicator installation={installation.id} />
                         </div>
-                        <StatsSummary summary={summary} />
+                        {!!summary && <StatsSummary summary={summary} />}
                     </div>
                 </div>
                 <LiveStats values={liveValues} />
@@ -71,8 +73,7 @@ class InstallationPage extends Component {
 
 export default {
     component: withRouter(InstallationPage),
-    loadData: (state, params, cookies) => {
-        console.log('cookies', cookies, cookies.get('favoriteInstallations'))        
+    loadData: (state, params) => {
         return {
             promise: Promise.all([
                 state.stats.fetchStats(params.id),

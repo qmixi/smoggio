@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Installation from '../Installation';
 import './styles.scss';
 
-const Installations = ({ installations }) => (
-    <div className="installations">
-        {installations.map((installation) => (
-            <Installation key={installation.id} installation={installation} />
-        ))}
+const Installations = ({ installations }) => {    
+    return (
+        <div className="installations">
+            {installations.map((installation) => (
+                <Installation key={installation.id} installation={installation} />
+            ))}
 
-    </div>
+        </div>
 
-)
+    )
+}
 
-export default Installations;
+export default memo(Installations);
+// export default Installations;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
@@ -19,7 +19,7 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
         return temperatureData ? temperatureData.value : false
     });
 
-    
+
     const data = {
         labels,
         datasets: [
@@ -62,7 +62,7 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
             }
         ]
     };
-    
+
     return (
         <div className="history">
             <div className="history__row">
@@ -92,5 +92,4 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
     )
 }
 
-
-export default HistoricalStats;
+export default memo(HistoricalStats);

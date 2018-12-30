@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import './styles.scss';
 
-const CoordsInput = ({ fetchCoords, fetchInstallations  }) => {
+const CoordsInput = ({ fetchCoords, fetchInstallations }) => {
     const [address, setAddress] = useState('');
 
-    useEffect(() => {
-        console.log('cza, cza')        
-        navigator.geolocation.getCurrentPosition((pos) => {
-            console.log('pos', pos)
-            fetchInstallations(pos.coords.latitude, pos.coords.longitude);            
+    useEffect(() => {        
+        navigator.geolocation.getCurrentPosition((pos) => {            
+            fetchInstallations(pos.coords.latitude, pos.coords.longitude);
         })
     }, []);
 
@@ -25,4 +23,4 @@ const CoordsInput = ({ fetchCoords, fetchInstallations  }) => {
     )
 }
 
-export default CoordsInput;
+export default memo(CoordsInput);

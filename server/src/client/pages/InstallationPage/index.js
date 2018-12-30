@@ -21,14 +21,12 @@ class InstallationPage extends Component {
     componentDidMount() {
         const { installations, stats, match: { params } } = this.props;
         stats.fetchStats(params.id)
-            .then(data => {
-                console.log('STATS', data)
+            .then(data => {                
                 stats.stats = data
             })
             .catch(console.log)
         installations.fetchInstallation(params.id)
-            .then(data => {
-                console.log('INSTALLATION', data)
+            .then(data => {                
                 installations.installation = data
             })
             .catch(console.log)
@@ -50,9 +48,7 @@ class InstallationPage extends Component {
         const liveValues = _.get(stats, 'current.values', []);
         const historyValues = _.get(stats, 'history', []);
         const forecastValues = _.get(stats, 'forecast', []);
-        const description = _.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.')
-
-        console.log('installation', installation, 'isDisconnected', isDisconnected)
+        const description = _.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.');
 
         return (
             <div className="installation-page">

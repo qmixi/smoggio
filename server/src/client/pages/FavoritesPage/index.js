@@ -6,8 +6,7 @@ import { withCookies } from 'react-cookie';
 
 import './styles.scss';
 import '../../components/Nav/styles.scss';
-import CoordsInput from '../../components/CoordsInput';
-import Installations from '../../components/Installations';
+import Installations from '../../components/Installations/Installations';
 
 
 @inject('installations')

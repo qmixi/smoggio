@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import './styles.scss';
 
-const InstallationHeader = ({ summary: { value, level, description, advice } = {} }) => {
+const InstallationHeader = ({ summary: { value, level, description } = {} }) => {
     return (
         <div className={cx('summary', {
             'summary--low': ['LOW', 'VERY_LOW'].includes(level),

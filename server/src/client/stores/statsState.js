@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import "isomorphic-fetch";
 import _ from 'lodash';
 import { getHeader } from '../../helpers/utils';
@@ -17,6 +17,12 @@ export default class StatsState {
             .catch(e => console.log(e));
 
     }
+
+    @computed get isDisconnected() {
+        const values = _.get(this.stats, 'current.values', []);
+        return values.length < 1;
+    }
+
 
     toJson() {
         return {

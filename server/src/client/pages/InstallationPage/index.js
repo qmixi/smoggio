@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import _ from 'lodash';
 
 import InstallationHeader from '../../components/InstallationHeader';
+import Disconnected from '../../components/Disconnected';
 import StatsSummary from '../../components/StatsSummary';
 import FavoriteIndicator from '../../components/FavoriteIndicator';
 import LiveStats from '../../components/LiveStats';
@@ -44,13 +45,14 @@ class InstallationPage extends Component {
     }
 
     render() {
-        const { installations: { installation }, stats: { stats } } = this.props;
+        const { installations: { installation }, stats: { stats, isDisconnected } } = this.props;
         const summary = _.get(stats, 'current.indexes[0]', {});
         const liveValues = _.get(stats, 'current.values', []);
         const historyValues = _.get(stats, 'history', []);
         const forecastValues = _.get(stats, 'forecast', []);
+        const description = _.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.')
 
-        console.log('installation', installation)
+        console.log('installation', installation, 'isDisconnected', isDisconnected)
 
         return (
             <div className="installation-page">
@@ -61,11 +63,16 @@ class InstallationPage extends Component {
                         <div className="installation-page__indicator">
                             <FavoriteIndicator installation={installation.id} />
                         </div>
-                        {!!summary && <StatsSummary summary={summary} />}
+                        {!!summary && !isDisconnected && <StatsSummary summary={summary} />}
                     </div>
                 </div>
-                <LiveStats values={liveValues} />
-                <HistoricalStats history={historyValues} forecast={forecastValues} />
+                {isDisconnected && <div className="installation-page__disconnected">
+                    <Disconnected description={description} />
+                </div>}
+                {!isDisconnected && <React.Fragment>
+                    <LiveStats values={liveValues} />
+                    <HistoricalStats history={historyValues} forecast={forecastValues} />
+                </React.Fragment>}
             </div>
         );
     }

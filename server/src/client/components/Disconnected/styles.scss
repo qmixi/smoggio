@@ -1,0 +1,16 @@
+@import '../../colors';
+
+.disconnected {
+    text-align: center;    
+
+    &__description {
+        font-size: 20px;
+        padding-bottom: 15px;
+        color: $text_light;        
+    }
+
+    &__img {
+        max-height: 340px;
+        width: 500px;
+    }
+}

@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { observer, inject } from "mobx-react";
-import { action } from 'mobx';
 import _ from 'lodash';
 
 import './styles.scss';
 import '../../components/Nav/styles.scss';
 import CoordsInput from '../../components/CoordsInput';
-import Installations from '../../components/Installations';
+import Installations from '../../components/Installations/Installations';
 
 @inject('installations')
 @observer
@@ -39,7 +38,7 @@ class Home extends Component {
 
     render() {
         const { installations: { installations } } = this.props;
-        
+
         return (
             <div className="home-page">
                 <div className="title home-page__title">Welcome to Smoggio!</div>
@@ -47,7 +46,9 @@ class Home extends Component {
                 <div className="home-page__coords-input">
                     <CoordsInput fetchCoords={this.fetchCoords} fetchInstallations={this.fetchInstallations} />
                 </div>
-                <Installations installations={installations} />
+                {/* <Suspense fallback={<div>...Loading</div>}> */}
+                    <Installations installations={installations} />
+                {/* </Suspense> */}
             </div >
         )
     }

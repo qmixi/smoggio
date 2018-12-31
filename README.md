@@ -18,6 +18,11 @@ $ cd ssr/server
 $ npm install
 $ npm run dev
 ```
+- You have to create `.env` file and past there two necessary variables used by `Airly` and `Google Geocoding` Apis:
+```
+GEOCODING_API_KEY=your_geocoding_api_key
+AIRLY_API_KEY=your_airly_api_key
+```
 
 
 ## NPM Commands

@@ -1,4 +1,5 @@
-# Smoggio - Server side rendered app built with React and MobX to check air condition in your area.
+# Smoggio
+## Server side rendered app built with React and MobX to check air condition in your area.
 
 #### http://smoggio.herokuapp.com/
 

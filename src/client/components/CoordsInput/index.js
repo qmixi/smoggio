@@ -12,7 +12,7 @@ const CoordsInput = ({ fetchCoords, fetchInstallations }) => {
     }, []);
 
     const onInputKeyPress = event => {
-        if (e.key === 'Enter') {
+        if (event.key === 'Enter') {
             fetchCoords(address);
         }
     }

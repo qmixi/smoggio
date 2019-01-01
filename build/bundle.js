@@ -614,7 +614,7 @@ var CoordsInput = function CoordsInput(_ref) {
     }, []);
 
     var onInputKeyPress = function onInputKeyPress(event) {
-        if (e.key === 'Enter') {
+        if (event.key === 'Enter') {
             fetchCoords(address);
         }
     };

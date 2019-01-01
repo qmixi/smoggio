@@ -361,11 +361,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterConfig = __webpack_require__(5);
 
+__webpack_require__(20);
+
 var _Nav = __webpack_require__(19);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-__webpack_require__(20);
+var _Footer = __webpack_require__(70);
+
+var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -377,12 +381,17 @@ var App = function App(_ref) {
         { className: 'app' },
         _react2.default.createElement(
             'div',
-            { className: 'app-row' },
+            { className: 'app__row' },
             _react2.default.createElement(_Nav2.default, null),
             _react2.default.createElement(
                 'div',
-                { className: 'app-wrapper' },
-                (0, _reactRouterConfig.renderRoutes)(route.routes)
+                { className: 'app__wrapper' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'app__routes' },
+                    (0, _reactRouterConfig.renderRoutes)(route.routes)
+                ),
+                _react2.default.createElement(_Footer2.default, null)
             )
         )
     );
@@ -656,7 +665,7 @@ var CoordsInput = function CoordsInput(_ref) {
     );
 };
 
-exports.default = (0, _react.memo)(CoordsInput);
+exports.default = CoordsInput;
 
 /***/ }),
 /* 24 */
@@ -1938,6 +1947,68 @@ exports.default = StatsState;
 /***/ (function(module, exports) {
 
 module.exports = require("universal-cookie-express");
+
+/***/ }),
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(71);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+    return _react2.default.createElement(
+        'div',
+        { className: 'footer' },
+        _react2.default.createElement('img', { src: '/static/logo.png' }),
+        _react2.default.createElement(
+            'div',
+            { className: 'footer__description' },
+            'Powered by Airly'
+        ),
+        _react2.default.createElement(
+            'a',
+            { className: 'footer__link', href: 'http://www.map.airly.eu', target: '_blank' },
+            'www.map.airly.eu'
+        )
+    );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

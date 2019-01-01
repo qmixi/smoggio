@@ -64202,11 +64202,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterConfig = __webpack_require__(194);
 
+__webpack_require__(603);
+
 var _Nav = __webpack_require__(602);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-__webpack_require__(603);
+var _Footer = __webpack_require__(798);
+
+var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64218,12 +64222,17 @@ var App = function App(_ref) {
         { className: 'app' },
         _react2.default.createElement(
             'div',
-            { className: 'app-row' },
+            { className: 'app__row' },
             _react2.default.createElement(_Nav2.default, null),
             _react2.default.createElement(
                 'div',
-                { className: 'app-wrapper' },
-                (0, _reactRouterConfig.renderRoutes)(route.routes)
+                { className: 'app__wrapper' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'app__routes' },
+                    (0, _reactRouterConfig.renderRoutes)(route.routes)
+                ),
+                _react2.default.createElement(_Footer2.default, null)
             )
         )
     );
@@ -64497,7 +64506,7 @@ var CoordsInput = function CoordsInput(_ref) {
     );
 };
 
-exports.default = (0, _react.memo)(CoordsInput);
+exports.default = CoordsInput;
 
 /***/ }),
 /* 607 */
@@ -81727,6 +81736,68 @@ var StatsState = (_class = function () {
     }
 }), _applyDecoratedDescriptor(_class.prototype, 'fetchStats', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'fetchStats'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'isDisconnected', [_mobx.computed], Object.getOwnPropertyDescriptor(_class.prototype, 'isDisconnected'), _class.prototype)), _class);
 exports.default = StatsState;
+
+/***/ }),
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(799);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+    return _react2.default.createElement(
+        'div',
+        { className: 'footer' },
+        _react2.default.createElement('img', { src: '/static/logo.png' }),
+        _react2.default.createElement(
+            'div',
+            { className: 'footer__description' },
+            'Powered by Airly'
+        ),
+        _react2.default.createElement(
+            'a',
+            { className: 'footer__link', href: 'http://www.map.airly.eu', target: '_blank' },
+            'www.map.airly.eu'
+        )
+    );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 799 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

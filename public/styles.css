@@ -19,13 +19,16 @@ body {
   color: #6856e5;
   margin-bottom: 60px; }
 
-.app-row {
+.app__row {
   display: flex; }
 
-.app-wrapper {
+.app__wrapper {
+  width: 100%; }
+
+.app__routes {
   background: #f4f5f7;
-  width: 100%;
-  padding: 25px; }
+  padding: 25px;
+  min-height: calc(100vh - 100px); }
 
 button {
   padding: 0 30px;
@@ -44,6 +47,22 @@ button {
   button:disabled {
     opacity: 0.6;
     cursor: not-allowed; }
+.footer {
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  justify-content: center;
+  height: 40px; }
+  .footer img {
+    width: 60px;
+    height: 30px; }
+  .footer__description {
+    color: #c2c1ca;
+    padding: 0 10px; }
+  .footer__link {
+    color: #6856e5;
+    text-decoration: none; }
 .home-page__title {
   font-size: 32px;
   margin: 10px 0 5px;

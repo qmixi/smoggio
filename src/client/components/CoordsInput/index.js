@@ -34,4 +34,4 @@ const CoordsInput = ({ fetchCoords, fetchInstallations }) => {
     )
 }
 
-export default memo(CoordsInput);
+export default CoordsInput;

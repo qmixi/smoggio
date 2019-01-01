@@ -31,14 +31,18 @@ body {
 
 .app {
 
-    &-row {
+    &__row {
         display: flex;
     }
 
-    &-wrapper {
-        background: $gray_dark;
+    &__wrapper {        
         width: 100%;
+    }
+
+    &__routes {
+        background: $gray_dark;
         padding: 25px;
+        min-height: calc(100vh - 100px);
     }
 }
 

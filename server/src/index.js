@@ -11,6 +11,7 @@ import InstallationsState from './client/stores/installationsState';
 import StatsState from './client/stores/statsState';
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use('/static', express.static('public'));
 app.use(cookiesMiddleware());
@@ -58,6 +59,6 @@ app.get('*', (req, res) => {
         .catch(console.log)
 });
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
 })

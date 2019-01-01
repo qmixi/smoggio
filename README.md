@@ -15,7 +15,7 @@
 
 ```shell
 $ git clone https://github.com/qmixi/ssr.git
-$ cd ssr/server
+$ cd ssr
 $ npm install
 $ npm run dev
 ```

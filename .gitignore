@@ -1,6 +1,3 @@
 **/node_modules
-public/bundle.js
-public/styles.css
-build/bundle.js
 build/styles.css
 .env

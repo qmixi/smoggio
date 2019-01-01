@@ -1,0 +1,316 @@
+html, body {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif; }
+
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 10px 0 5px;
+  color: #464150; }
+  .title--small {
+    font-size: 26px; }
+
+.subtitle {
+  font-size: 20px;
+  color: #6856e5;
+  margin-bottom: 60px; }
+
+.app-row {
+  display: flex; }
+
+.app-wrapper {
+  background: #f4f5f7;
+  width: 100%;
+  padding: 25px; }
+
+button {
+  padding: 0 30px;
+  text-align: center;
+  background: #688add;
+  border: 1px solid #688add;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease-out;
+  height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none; }
+  button:not(:disabled):hover {
+    background: #6856e5;
+    color: white; }
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed; }
+.home-page__title {
+  font-size: 32px;
+  margin: 10px 0 5px;
+  color: #464150; }
+
+.home-page__subtitle {
+  font-size: 20px;
+  color: #6856e5;
+  margin-bottom: 60px; }
+
+.home-page__coords-input {
+  margin: 0 -25px;
+  padding: 25px;
+  background: white; }
+.nav {
+  background: linear-gradient(45deg, #688add, #6856e5);
+  min-height: 100vh;
+  width: 93px;
+  z-index: 99; }
+  .nav-logo {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    background: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    padding: 10px 0; }
+  .nav-item {
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    padding: 30px 10px;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease-out; }
+    .nav-item:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.3); }
+    .nav-item__icon {
+      font-size: 28px; }
+    .nav-item:not(:last-of-type):after {
+      content: '';
+      position: absolute;
+      width: calc(100% - 14px);
+      left: 7px;
+      display: block;
+      height: 1px;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.35); }
+.coords-input {
+  display: flex; }
+  .coords-input__title-tx {
+    font-size: 18px;
+    color: #464150; }
+  .coords-input__title-sub {
+    color: #c2c1ca;
+    font-size: 12px; }
+  .coords-input input {
+    background: transparent;
+    padding: 7px 10px;
+    height: 40px;
+    width: 30%;
+    min-width: 250px;
+    margin: 0px 20px;
+    border: 0;
+    border-bottom: 1px solid #6856e5;
+    outline: none; }
+.installation {
+  background: white;
+  display: block;
+  padding: 20px 40px;
+  box-shadow: 0px 0px 61px 6px #e5e5e5;
+  margin: 20px;
+  transition: all .2s ease-out;
+  text-decoration: none;
+  width: 17.5%;
+  box-sizing: content-box;
+  position: relative;
+  overflow: hidden; }
+  .installation:after {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(45deg, #6856e5, #688add);
+    transition: all 0.4s ease-out;
+    bottom: 0;
+    left: -100%; }
+  .installation:hover {
+    transform: scale(1.1); }
+    .installation:hover:after {
+      left: 100%; }
+  .installation__city {
+    color: #c2c1ca;
+    margin-bottom: 5px; }
+  .installation__address {
+    color: #6856e5; }
+    .installation__address i {
+      font-size: 13px;
+      position: relative;
+      top: -1px; }
+.installations {
+  display: flex;
+  margin: 50px -20px;
+  justify-content: left;
+  flex-wrap: wrap; }
+.installation {
+  background: white;
+  display: block;
+  padding: 20px 40px;
+  box-shadow: 0px 0px 61px 6px #e5e5e5;
+  margin: 20px;
+  transition: all .2s ease-out;
+  text-decoration: none;
+  width: 17.5%;
+  box-sizing: content-box;
+  position: relative;
+  overflow: hidden; }
+  .installation:after {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(45deg, #6856e5, #688add);
+    transition: all 0.4s ease-out;
+    bottom: 0;
+    left: -100%; }
+  .installation:hover {
+    transform: scale(1.1); }
+    .installation:hover:after {
+      left: 100%; }
+  .installation__city {
+    color: #c2c1ca;
+    margin-bottom: 5px; }
+  .installation__address {
+    color: #6856e5; }
+    .installation__address i {
+      font-size: 13px;
+      position: relative;
+      top: -1px; }
+.disconnected {
+  text-align: center; }
+  .disconnected__description {
+    font-size: 20px;
+    padding-bottom: 15px;
+    color: #c2c1ca; }
+  .disconnected__img {
+    max-height: 340px;
+    width: 500px; }
+.summary {
+  height: 45px;
+  padding: 10px 20px;
+  color: white;
+  margin-right: 0px;
+  display: flex;
+  border-radius: 12px;
+  line-height: 40px;
+  margin-top: 20px; }
+  .summary--low {
+    background: #00b40a; }
+  .summary--medium {
+    background: #ff9a34; }
+  .summary--high {
+    background: #f23722; }
+  .summary__value {
+    border: 2px solid white;
+    border-radius: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    line-height: 41px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 10px; }
+  .summary__description {
+    padding-top: 2px; }
+.favorite-indicator {
+  font-size: 40px;
+  color: #6856e5;
+  cursor: pointer; }
+@keyframes live {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0.5; }
+  100% {
+    opacity: 1; } }
+
+.stats-live {
+  margin: 0 -20px;
+  padding: 20px;
+  background: white; }
+  .stats-live__title {
+    position: relative;
+    margin-left: 16px; }
+    .stats-live__title:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: live 2s linear infinite;
+      background: #f23722;
+      border-radius: 50%;
+      left: -15px;
+      top: 11px; }
+  .stats-live__list {
+    max-width: 480px;
+    margin-top: 20px; }
+  .stats-live__item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #c2c1ca;
+    padding: 10px;
+    padding: 8px 17px; }
+    .stats-live__item-title {
+      color: #464150; }
+    .stats-live__item-value {
+      color: #464150;
+      font-weight: bold; }
+    .stats-live__item-unit {
+      margin-left: 5px;
+      color: #c2c1ca;
+      font-size: 14px;
+      font-weight: 400; }
+.history {
+  margin-top: 20px; }
+  .history__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; }
+  .history__chart {
+    max-width: 800px;
+    margin-top: 30px; }
+  .history__title {
+    margin-top: 30px;
+    margin-bottom: 0; }
+  .history__temperature {
+    margin-top: 30px; }
+    .history__temperature-title {
+      color: #688add; }
+.installation-page__row {
+  display: flex;
+  justify-content: space-between; }
+
+.installation-page__info {
+  display: flex; }
+
+.installation-page__indicator {
+  margin-top: 31px;
+  margin-right: 20px; }
+
+.installation-page__disconnected {
+  margin: 0 -25px;
+  background: white;
+  padding: 25px; }
+.home-page__title {
+  font-size: 32px;
+  margin: 10px 0 5px;
+  color: #464150; }
+
+.home-page__subtitle {
+  font-size: 20px;
+  color: #6856e5;
+  margin-bottom: 60px; }
+
+.home-page__coords-input {
+  margin: 0 -25px;
+  padding: 25px;
+  background: white; }

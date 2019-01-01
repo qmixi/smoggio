@@ -1,7 +1,5 @@
 @import '../../colors';
 
-@import '../../colors';
-
 .footer {
     padding: 5px 20px;
     display: flex;
@@ -23,5 +21,14 @@
     &__link {
         color: $dark;
         text-decoration: none;
+    }
+
+    &__stack {
+        position: absolute;
+        right: 10px;
+        color: $text_light;
+        cursor: pointer;
+        font-size: 12px;
+        text-transform: uppercase;
     }
 }

@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet'
 import { CookiesProvider } from 'react-cookie';
 
 import Routes from '../client/Routes';
+import {ModalProvider} from '../client/components/Modal';
 
 
 export default (req, state, context) => {
@@ -15,7 +16,9 @@ export default (req, state, context) => {
         <Provider {...state}>
             <CookiesProvider cookies={req.universalCookies}>
                 <StaticRouter context={context} location={req.url}>
-                    <div>{renderRoutes(Routes)}</div>
+                    <ModalProvider>
+                        <div>{renderRoutes(Routes)}</div>
+                    </ModalProvider>
                 </StaticRouter>
             </CookiesProvider>
         </Provider>

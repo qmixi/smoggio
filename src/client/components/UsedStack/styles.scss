@@ -1,0 +1,32 @@
+@import '../../colors';
+
+.stack {
+    
+
+    &__title {
+        color: $dark;
+    }
+
+    &__list {
+        margin-top: 20px;
+
+        &-item {
+            padding-bottom: 10px;
+            position: relative;
+            padding-left: 17px;
+            color: $text_light;            
+
+            &:before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                background: $light;
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                top: 8px;
+            }
+        }
+    }
+}

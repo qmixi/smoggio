@@ -1,0 +1,23 @@
+@import '../../colors';
+
+.modal {
+    position: fixed;
+    width: 700px;
+    height: 370px;
+    background: white;
+    left: 50%;
+    top: 50%;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    box-shadow: 0px 0px 61px 6px #e5e5e5;
+
+    &__close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 27px;
+        color: $text_dark;
+        cursor: pointer;
+    }
+}

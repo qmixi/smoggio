@@ -9,6 +9,7 @@ import { CookiesProvider } from 'react-cookie';
 import Routes from './Routes'
 import InstallationsState from './stores/installationsState'
 import StatsState from './stores/statsState'
+import { ModalProvider } from './components/Modal';
 
 const installations = new InstallationsState(window.INITIAL_STATE)
 const stats = new StatsState(window.INITIAL_STATE)
@@ -22,7 +23,9 @@ ReactDOM.hydrate(
     <Provider {...state}>
         <CookiesProvider>
             <BrowserRouter>
-                <div>{renderRoutes(Routes)}</div>
+                <ModalProvider>
+                    <div>{renderRoutes(Routes)}</div>
+                </ModalProvider>
             </BrowserRouter>
         </CookiesProvider>
     </Provider>,

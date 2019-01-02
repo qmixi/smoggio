@@ -60397,7 +60397,6 @@ var InstallationPage = (_dec = (0, _mobxReact.inject)('stats', 'installations'),
             var forecastValues = _lodash2.default.get(stats, 'forecast', []);
             var description = _lodash2.default.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.');
             var isLoading = !params || parseInt(params.id, 10) !== installation.id;
-            console.log('isLoading', isLoading, 'params.id', params.id, 'installation.id', installation.id);
 
             return _react2.default.createElement(
                 'div',
@@ -77604,6 +77603,35 @@ var UsedStack = function UsedStack() {
             ),
             _react2.default.createElement(
                 'div',
+                { className: 'stack__list-sublist' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'stack__list-subitem' },
+                    'Context API'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'stack__list-subitem' },
+                    'Memo'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'stack__list-subitem' },
+                    'UseEffect'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'stack__list-subitem' },
+                    'UseState'
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'stack__list-item' },
+                'Server Side Rendering'
+            ),
+            _react2.default.createElement(
+                'div',
                 { className: 'stack__list-item' },
                 'MobX'
             ),
@@ -77621,16 +77649,6 @@ var UsedStack = function UsedStack() {
                 'div',
                 { className: 'stack__list-item' },
                 'Webpack'
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'stack__list-item' },
-                'react-cookie'
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'stack__list-item' },
-                'Server side rendering concept'
             )
         )
     );

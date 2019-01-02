@@ -52,7 +52,6 @@ class InstallationPage extends Component {
         const forecastValues = _.get(stats, 'forecast', []);
         const description = _.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.');
         const isLoading = !params || parseInt(params.id, 10) !== installation.id;
-        console.log('isLoading', isLoading, 'params.id', params.id, 'installation.id', installation.id);
 
         return (
             <div className="installation-page">

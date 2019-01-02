@@ -28,5 +28,30 @@
                 top: 8px;
             }
         }
+
+        &-sublist {
+            margin-top: -8px;
+            margin-bottom: 10px;
+            margin-left: 20px;        
+        }
+
+        &-subitem {
+            padding-bottom: 2px;
+            position: relative;
+            padding-left: 17px;
+            color: #c2c1ca;
+
+            &:before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                background: $low;
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                top: 8px;
+            }
+        }
     }
 }

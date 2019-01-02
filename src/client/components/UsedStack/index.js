@@ -7,13 +7,17 @@ const UsedStack = () => (
         <div className="title stack__title">Stack used to create Smoggio app</div>
         <div className="stack__list">
             <div className="stack__list-item">React 16.7</div>
+            <div className="stack__list-sublist">
+                <div className="stack__list-subitem">Context API</div>
+                <div className="stack__list-subitem">Memo</div>
+                <div className="stack__list-subitem">UseEffect</div>
+                <div className="stack__list-subitem">UseState</div>
+            </div>
+            <div className="stack__list-item">Server Side Rendering</div>
             <div className="stack__list-item">MobX</div>
             <div className="stack__list-item">Express</div>
             <div className="stack__list-item">SCSS</div>
             <div className="stack__list-item">Webpack</div>
-            <div className="stack__list-item">react-cookie</div>
-            <div className="stack__list-item">Server side rendering concept</div>
-
         </div>
     </div>
 );

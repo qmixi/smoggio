@@ -570,6 +570,14 @@ var _Installations = __webpack_require__(9);
 
 var _Installations2 = _interopRequireDefault(_Installations);
 
+var _GeolocationFetcher = __webpack_require__(81);
+
+var _GeolocationFetcher2 = _interopRequireDefault(_GeolocationFetcher);
+
+var _Loader = __webpack_require__(84);
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -587,6 +595,7 @@ var Home = (_dec = (0, _mobxReact.inject)('installations'), _dec(_class = (0, _m
         var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
         _this.fetchCoords = function (address) {
+            _this.setLoadingValue(true);
             _this.props.installations.fetchGeocodingData(address).then(function (data) {
                 var coords = _lodash2.default.get(data, 'results[0].geometry.location', {});
                 var lat = coords.lat,
@@ -602,9 +611,17 @@ var Home = (_dec = (0, _mobxReact.inject)('installations'), _dec(_class = (0, _m
             var fetchInstallations = _this.props.installations.fetchInstallations;
 
             fetchInstallations(lat, lng).then(function (data) {
-                console.log('InnsTallatioS', data);
+                _this.setLoadingValue(false);
                 _this.props.installations.installations = data;
+            }).catch(function () {
+                _this.setLoadingValue(false);
             });
+        };
+
+        _this.setLoadingValue = function (value) {
+            var installations = _this.props.installations;
+
+            installations.isLoading = value;
         };
 
         return _this;
@@ -613,8 +630,9 @@ var Home = (_dec = (0, _mobxReact.inject)('installations'), _dec(_class = (0, _m
     _createClass(Home, [{
         key: 'render',
         value: function render() {
-            var installations = this.props.installations.installations;
-
+            var _props$installations = this.props.installations,
+                installations = _props$installations.installations,
+                isLoading = _props$installations.isLoading;
 
             return _react2.default.createElement(
                 'div',
@@ -632,9 +650,10 @@ var Home = (_dec = (0, _mobxReact.inject)('installations'), _dec(_class = (0, _m
                 _react2.default.createElement(
                     'div',
                     { className: 'home-page__coords-input' },
-                    _react2.default.createElement(_CoordsInput2.default, { fetchCoords: this.fetchCoords, fetchInstallations: this.fetchInstallations })
+                    _react2.default.createElement(_CoordsInput2.default, { fetchCoords: this.fetchCoords })
                 ),
-                _react2.default.createElement(_Installations2.default, { installations: installations })
+                _lodash2.default.isEmpty(installations) && _react2.default.createElement(_GeolocationFetcher2.default, { fetchInstallations: this.fetchInstallations, setLoadingValue: this.setLoadingValue }),
+                isLoading ? _react2.default.createElement(_Loader2.default, null) : _react2.default.createElement(_Installations2.default, { installations: installations })
             );
         }
     }]);
@@ -681,12 +700,6 @@ var CoordsInput = function CoordsInput(_ref) {
         address = _useState2[0],
         setAddress = _useState2[1];
 
-    (0, _react.useEffect)(function () {
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            fetchInstallations(pos.coords.latitude, pos.coords.longitude);
-        });
-    }, []);
-
     var onInputKeyPress = function onInputKeyPress(event) {
         if (event.key === 'Enter') {
             fetchCoords(address);
@@ -730,7 +743,7 @@ var CoordsInput = function CoordsInput(_ref) {
     );
 };
 
-exports.default = CoordsInput;
+exports.default = (0, _react.memo)(CoordsInput);
 
 /***/ }),
 /* 26 */
@@ -856,6 +869,10 @@ var _HistoricalStats = __webpack_require__(41);
 
 var _HistoricalStats2 = _interopRequireDefault(_HistoricalStats);
 
+var _Loader = __webpack_require__(84);
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 __webpack_require__(45);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -940,43 +957,50 @@ var InstallationPage = (_dec = (0, _mobxReact.inject)('stats', 'installations'),
                 installation = _props2.installations.installation,
                 _props2$stats = _props2.stats,
                 stats = _props2$stats.stats,
-                isDisconnected = _props2$stats.isDisconnected;
+                isDisconnected = _props2$stats.isDisconnected,
+                params = _props2.match.params;
 
             var summary = _lodash2.default.get(stats, 'current.indexes[0]', {});
             var liveValues = _lodash2.default.get(stats, 'current.values', []);
             var historyValues = _lodash2.default.get(stats, 'history', []);
             var forecastValues = _lodash2.default.get(stats, 'forecast', []);
             var description = _lodash2.default.get(summary, 'description', 'Sensor in this location has been probably disconnected from power.');
+            var isLoading = !params || parseInt(params.id, 10) !== installation.id;
+            console.log('isLoading', isLoading, 'params.id', params.id, 'installation.id', installation.id);
 
             return _react2.default.createElement(
                 'div',
                 { className: 'installation-page' },
                 this.head(),
-                _react2.default.createElement(
+                isLoading ? _react2.default.createElement(_Loader2.default, null) : _react2.default.createElement(
                     'div',
-                    { className: 'installation-page__row' },
-                    _react2.default.createElement(_InstallationHeader2.default, { installation: installation }),
+                    null,
                     _react2.default.createElement(
                         'div',
-                        { className: 'installation-page__info' },
+                        { className: 'installation-page__row' },
+                        _react2.default.createElement(_InstallationHeader2.default, { installation: installation }),
                         _react2.default.createElement(
                             'div',
-                            { className: 'installation-page__indicator' },
-                            _react2.default.createElement(_FavoriteIndicator2.default, { installation: installation.id })
-                        ),
-                        !!summary && !isDisconnected && _react2.default.createElement(_StatsSummary2.default, { summary: summary })
+                            { className: 'installation-page__info' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'installation-page__indicator' },
+                                _react2.default.createElement(_FavoriteIndicator2.default, { installation: installation.id })
+                            ),
+                            !!summary && !isDisconnected && _react2.default.createElement(_StatsSummary2.default, { summary: summary })
+                        )
+                    ),
+                    isDisconnected && _react2.default.createElement(
+                        'div',
+                        { className: 'installation-page__disconnected' },
+                        _react2.default.createElement(_Disconnected2.default, { description: description })
+                    ),
+                    !isDisconnected && _react2.default.createElement(
+                        _react2.default.Fragment,
+                        null,
+                        _react2.default.createElement(_LiveStats2.default, { values: liveValues }),
+                        _react2.default.createElement(_HistoricalStats2.default, { history: historyValues, forecast: forecastValues })
                     )
-                ),
-                isDisconnected && _react2.default.createElement(
-                    'div',
-                    { className: 'installation-page__disconnected' },
-                    _react2.default.createElement(_Disconnected2.default, { description: description })
-                ),
-                !isDisconnected && _react2.default.createElement(
-                    _react2.default.Fragment,
-                    null,
-                    _react2.default.createElement(_LiveStats2.default, { values: liveValues }),
-                    _react2.default.createElement(_HistoricalStats2.default, { history: historyValues, forecast: forecastValues })
                 )
             );
         }
@@ -1224,7 +1248,7 @@ var FavoriteIndicator = function FavoriteIndicator(_ref) {
     );
 };
 
-exports.default = (0, _reactCookie.withCookies)(FavoriteIndicator);
+exports.default = (0, _react.memo)((0, _reactCookie.withCookies)(FavoriteIndicator));
 
 /***/ }),
 /* 38 */
@@ -1246,10 +1270,6 @@ Object.defineProperty(exports, "__esModule", {
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _classnames = __webpack_require__(11);
-
-var _classnames2 = _interopRequireDefault(_classnames);
 
 var _lodash = __webpack_require__(1);
 
@@ -1312,7 +1332,7 @@ var LiveStats = function LiveStats(_ref) {
     );
 };
 
-exports.default = LiveStats;
+exports.default = (0, _react.memo)(LiveStats);
 
 /***/ }),
 /* 40 */
@@ -1818,9 +1838,7 @@ var ModalProvider = exports.ModalProvider = function (_Component) {
     _createClass(ModalProvider, [{
         key: 'render',
         value: function render() {
-            console.log("modalContent", this.state.modalContent);
             var ContentComponent = this.state.modalContent;
-            // const ContentComponent = true;
             return _react2.default.createElement(
                 ModalContext.Provider,
                 { value: {
@@ -1897,7 +1915,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3;
+var _desc, _value, _class, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
 var _mobx = __webpack_require__(4);
 
@@ -1966,6 +1984,8 @@ var InstallationsState = (_class = function () {
 
         _initDefineProp(this, 'favs', _descriptor3, this);
 
+        _initDefineProp(this, 'isLoading', _descriptor4, this);
+
         this.installations = _lodash2.default.get(initialState, 'installations.installations', []);
         this.installation = _lodash2.default.get(initialState, 'installations.installation', {});
         this.favs = _lodash2.default.get(initialState, 'installations.favs', []);
@@ -2024,6 +2044,11 @@ var InstallationsState = (_class = function () {
     enumerable: true,
     initializer: function initializer() {
         return [];
+    }
+}), _descriptor4 = _applyDecoratedDescriptor(_class.prototype, 'isLoading', [_mobx.observable], {
+    enumerable: true,
+    initializer: function initializer() {
+        return false;
     }
 }), _applyDecoratedDescriptor(_class.prototype, 'fetchInstallations', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'fetchInstallations'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fetchInstallation', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'fetchInstallation'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'fetchGeocodingData', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'fetchGeocodingData'), _class.prototype)), _class);
 exports.default = InstallationsState;
@@ -2242,6 +2267,82 @@ exports.default = UsedStack;
 
 /***/ }),
 /* 78 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(82);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GeolocationFetcher = function GeolocationFetcher(_ref) {
+    var fetchInstallations = _ref.fetchInstallations,
+        setLoadingValue = _ref.setLoadingValue;
+
+
+    (0, _react.useEffect)(function () {
+        setLoadingValue(true);
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            fetchInstallations(pos.coords.latitude, pos.coords.longitude);
+        });
+    }, []);
+
+    return _react2.default.createElement('div', null);
+};
+
+exports.default = (0, _react.memo)(GeolocationFetcher);
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 83 */,
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(85);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Loader = function Loader() {
+  return _react2.default.createElement('div', { className: 'loader' });
+};
+
+exports.default = Loader;
+
+/***/ }),
+/* 85 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

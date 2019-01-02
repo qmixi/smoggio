@@ -24,10 +24,8 @@ export class ModalProvider extends Component {
         });
     };
 
-    render() {
-        console.log("modalContent", this.state.modalContent)
-        const ContentComponent = this.state.modalContent;
-        // const ContentComponent = true;
+    render() {        
+        const ContentComponent = this.state.modalContent;        
         return (
             <ModalContext.Provider value={{
                 modalContent: this.state.modalContent,

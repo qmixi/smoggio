@@ -6,6 +6,9 @@ import './styles.scss';
 import '../../components/Nav/styles.scss';
 import CoordsInput from '../../components/CoordsInput';
 import Installations from '../../components/Installations/Installations';
+import GeolocationFetcher from '../../components/GeolocationFetcher';
+import Loader from '../../components/Loader';
+
 
 @inject('installations')
 @observer
@@ -16,6 +19,7 @@ class Home extends Component {
     }
 
     fetchCoords = address => {
+        this.setLoadingValue(true);
         this.props.installations.fetchGeocodingData(address)
             .then(data => {
                 const coords = _.get(data, 'results[0].geometry.location', {})
@@ -31,23 +35,31 @@ class Home extends Component {
         const { installations: { fetchInstallations } } = this.props;
         fetchInstallations(lat, lng)
             .then(data => {
-                console.log('InnsTallatioS', data)
+                this.setLoadingValue(false);
                 this.props.installations.installations = data;
+            })
+            .catch(() => {
+                this.setLoadingValue(false);
             });
     }
 
-    render() {
-        const { installations: { installations } } = this.props;
+    setLoadingValue = value => {        
+        const { installations } = this.props;
+        installations.isLoading = value;
+    }
 
+    render() {
+        const { installations: { installations, isLoading } } = this.props;        
         return (
             <div className="home-page">
                 <div className="title home-page__title">Welcome to Smoggio!</div>
                 <div className="subtitle home-page__subtitle">Let's check air condidtion in your city 🚀</div>
                 <div className="home-page__coords-input">
-                    <CoordsInput fetchCoords={this.fetchCoords} fetchInstallations={this.fetchInstallations} />
+                    <CoordsInput fetchCoords={this.fetchCoords} />
                 </div>
+                {_.isEmpty(installations) && <GeolocationFetcher fetchInstallations={this.fetchInstallations} setLoadingValue={this.setLoadingValue} />}
                 {/* <Suspense fallback={<div>...Loading</div>}> */}
-                    <Installations installations={installations} />
+                {isLoading ? <Loader /> : <Installations installations={installations} />}
                 {/* </Suspense> */}
             </div >
         )

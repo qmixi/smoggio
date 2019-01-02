@@ -1,0 +1,30 @@
+@import '../../colors';
+
+.coords-input {
+    display: flex;
+
+    &__title {
+
+        &-tx {
+            font-size: 18px;
+            color: $text_dark;
+        }
+
+        &-sub {
+            color: $text_light;
+            font-size: 12px;
+        }
+    }
+
+    input {
+        background: transparent;
+        padding: 7px 10px;
+        height: 40px;
+        width: 30%;
+        min-width: 250px;
+        margin: 0px 20px;
+        border: 0;
+        border-bottom: 1px solid $dark;
+        outline: none;
+    }
+}

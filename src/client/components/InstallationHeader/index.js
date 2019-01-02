@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import './styles.scss';
 
-const InstallationHeader = (props) => {    
+const InstallationHeader = (props) => {
     const city = _.get(props, 'installation.address.city', '');
     const street = _.get(props, 'installation.address.street', '');
     const number = _.get(props, 'installation.address.number', '');

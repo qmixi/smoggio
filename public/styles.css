@@ -213,6 +213,62 @@ button {
   margin: 50px -20px;
   justify-content: left;
   flex-wrap: wrap; }
+.coords-input {
+  display: flex; }
+  .coords-input__title-tx {
+    font-size: 18px;
+    color: #464150; }
+  .coords-input__title-sub {
+    color: #c2c1ca;
+    font-size: 12px; }
+  .coords-input input {
+    background: transparent;
+    padding: 7px 10px;
+    height: 40px;
+    width: 30%;
+    min-width: 250px;
+    margin: 0px 20px;
+    border: 0;
+    border-bottom: 1px solid #6856e5;
+    outline: none; }
+@keyframes load {
+  0% {
+    width: 10px;
+    height: 10px;
+    opacity: 1; }
+  70% {
+    width: 70px;
+    height: 70px;
+    opacity: 0; }
+  100% {
+    width: 70px;
+    height: 70px;
+    opacity: 0; } }
+
+.loader {
+  width: 150px;
+  height: 150px;
+  background: transparent;
+  position: relative;
+  margin: auto;
+  margin-top: 50px; }
+  .loader:before {
+    content: "";
+    border-radius: 50%;
+    box-shadow: inset 0px 1px 84px #6856e5;
+    animation: load 1.2s ease-out infinite;
+    -webkit-animation: load 1.2s ease-out infinite;
+    -moz-animation: load 1.2s ease-out infinite;
+    -o-animation: load 1.2s ease-out infinite;
+    -ms-animation: load 1.2s ease-out infinite;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%; }
 .installation {
   background: white;
   display: block;

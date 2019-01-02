@@ -5,12 +5,6 @@ import './styles.scss';
 const CoordsInput = ({ fetchCoords, fetchInstallations }) => {
     const [address, setAddress] = useState('');
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            fetchInstallations(pos.coords.latitude, pos.coords.longitude);
-        })
-    }, []);
-
     const onInputKeyPress = event => {
         if (event.key === 'Enter') {
             fetchCoords(address);
@@ -34,4 +28,4 @@ const CoordsInput = ({ fetchCoords, fetchInstallations }) => {
     )
 }
 
-export default CoordsInput;
+export default memo(CoordsInput);

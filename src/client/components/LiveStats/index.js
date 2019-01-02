@@ -1,5 +1,4 @@
-import React from 'react';
-import cx from 'classnames';
+import React, { memo } from 'react';
 import _ from 'lodash';
 
 import './styles.scss';
@@ -34,4 +33,4 @@ const LiveStats = ({ values = [] }) => {
 }
 
 
-export default LiveStats;
+export default memo(LiveStats);

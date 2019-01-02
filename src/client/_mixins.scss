@@ -1,0 +1,23 @@
+@mixin transition($arg) {
+	transition: $arg;
+	-webkit-transition: $arg;
+	-moz-transition: $arg;
+	-o-transition: $arg;
+	-ms-transition: $arg;
+}
+
+@mixin transform($arg) {
+	transform: $arg;
+	-webkit-transform: $arg;
+	-moz-transform: $arg;
+	-o-transform: $arg;
+	-ms-transform: $arg;
+}
+
+@mixin animation($arg) {
+	animation: $arg;
+	-webkit-animation: $arg;
+	-moz-animation: $arg;
+	-o-animation: $arg;
+	-ms-animation: $arg;
+}

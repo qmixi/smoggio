@@ -8,13 +8,14 @@ export default class InstallationsState {
     @observable installations = [];
     @observable installation = [];
     @observable favs = [];
+    @observable isLoading = false;
 
     constructor(initialState) {
         this.installations = _.get(initialState, 'installations.installations', []);
         this.installation = _.get(initialState, 'installations.installation', {});
         this.favs = _.get(initialState, 'installations.favs', []);
     }
-
+    
     @action
     fetchInstallations(lat, lng) {
         return fetch(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=5&maxResults=10`, { headers: getHeader() })

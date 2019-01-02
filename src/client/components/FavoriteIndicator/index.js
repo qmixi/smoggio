@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { withCookies } from 'react-cookie';
 
 import './styles.scss';
@@ -10,7 +10,6 @@ const FavoriteIndicator = ({ cookies, installation }) => {
         const items = [...favoriteInstallations, installation];
         cookies.set('favInstallations', items, { path: '/' })
     }
-
 
     const removeFav = () => {
         const favoriteInstallations = cookies.get('favInstallations');
@@ -31,4 +30,4 @@ const FavoriteIndicator = ({ cookies, installation }) => {
     )
 }
 
-export default withCookies(FavoriteIndicator);
+export default memo(withCookies(FavoriteIndicator));

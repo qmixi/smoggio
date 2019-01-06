@@ -246,10 +246,6 @@ var _express2 = _interopRequireDefault(_express);
 
 var _reactRouterConfig = __webpack_require__(5);
 
-var _expressHttpProxy = __webpack_require__(17);
-
-var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
-
 var _Routes = __webpack_require__(7);
 
 var _Routes2 = _interopRequireDefault(_Routes);
@@ -275,13 +271,6 @@ var port = process.env.PORT || 3000;
 
 app.use('/static', _express2.default.static('public'));
 app.use(cookiesMiddleware());
-app.use('/api', (0, _expressHttpProxy2.default)('http://react-ssr-api.herokuapp.com', {
-    proxyReqOptDecorator: function proxyReqOptDecorator(opts) {
-        opts.headers['x-forwarded-host'] = 'localhost:3000';
-        return opts;
-    }
-}));
-
 app.get('*', function (req, res) {
     var installations = new _installationsState2.default();
     var stats = new _statsState2.default();
@@ -311,10 +300,6 @@ app.get('*', function (req, res) {
     Promise.all(promises).then(function () {
         var context = {};
         var content = (0, _render2.default)(req, state, context);
-        if (context.url) {
-            // handle redirection
-            return res.redirect(301, context.url);
-        }
         if (context.notFound) {
             res.status(404);
         }
@@ -339,12 +324,7 @@ module.exports = require("babel-polyfill");
 module.exports = require("express");
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = require("express-http-proxy");
-
-/***/ }),
+/* 17 */,
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 

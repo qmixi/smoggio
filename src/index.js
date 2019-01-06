@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import express from 'express';
 import { matchRoutes } from 'react-router-config';
-import proxy from 'express-http-proxy';
 const cookiesMiddleware = require('universal-cookie-express');
 
 
@@ -15,13 +14,6 @@ const port = process.env.PORT || 3000;
 
 app.use('/static', express.static('public'));
 app.use(cookiesMiddleware());
-app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
-    proxyReqOptDecorator(opts) {
-        opts.headers['x-forwarded-host'] = 'localhost:3000';
-        return opts
-    }
-}))
-
 app.get('*', (req, res) => {
     const installations = new InstallationsState();
     const stats = new StatsState();
@@ -46,11 +38,7 @@ app.get('*', (req, res) => {
     Promise.all(promises)
         .then(() => {
             const context = {};
-            const content = renderer(req, state, context);
-            if (context.url) {
-                // handle redirection
-                return res.redirect(301, context.url);
-            }
+            const content = renderer(req, state, context);            
             if (context.notFound) {
                 res.status(404);
             }

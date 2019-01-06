@@ -34,11 +34,12 @@ class InstallationPage extends Component {
 
     }
 
-    head() {
+    head(address = {}) {
+        const location = `${address.street}, ${address.number}`
         return (
             <Helmet>
-                <title>{`Installation`}</title>
-                <meta property="og:title" content="Intallation" />
+                <title>{`Installation - ${location}`}</title>
+                <meta property="og:title" content={`Intallation - ${location}`} />
             </Helmet>
         );
     }
@@ -55,7 +56,7 @@ class InstallationPage extends Component {
 
         return (
             <div className="installation-page">
-                {this.head()}
+                {this.head(installation.address)}
                 {isLoading ? <Loader /> : <div>
                     <div className="installation-page__row">
                         <InstallationHeader installation={installation} />

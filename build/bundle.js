@@ -939,15 +939,18 @@ var InstallationPage = (_dec = (0, _mobxReact.inject)('stats', 'installations'),
     }, {
         key: 'head',
         value: function head() {
+            var address = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            var location = address.street + ', ' + address.number;
             return _react2.default.createElement(
                 _reactHelmet.Helmet,
                 null,
                 _react2.default.createElement(
                     'title',
                     null,
-                    'Installation'
+                    'Installation - ' + location
                 ),
-                _react2.default.createElement('meta', { property: 'og:title', content: 'Intallation' })
+                _react2.default.createElement('meta', { property: 'og:title', content: 'Intallation - ' + location })
             );
         }
     }, {
@@ -970,7 +973,7 @@ var InstallationPage = (_dec = (0, _mobxReact.inject)('stats', 'installations'),
             return _react2.default.createElement(
                 'div',
                 { className: 'installation-page' },
-                this.head(),
+                this.head(installation.address),
                 isLoading ? _react2.default.createElement(_Loader2.default, null) : _react2.default.createElement(
                     'div',
                     null,

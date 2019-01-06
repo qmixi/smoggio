@@ -6,6 +6,11 @@
 ## Stack
 
 - React (16.7 beta)
+  - React Context
+  - Memo
+  - UseState
+  - UseEffect
+  
 - MobX
 - Express
 - SCSS
@@ -19,7 +24,7 @@ $ cd ssr
 $ npm install
 $ npm run dev
 ```
-- You have to create `.env` file and past there two necessary variables used by `Airly` and `Google Geocoding` Apis:
+- You have to create `.env` file and input there two necessary variables used by `Airly` and `Google Geocoding` Apis:
 ```
 GEOCODING_API_KEY=your_geocoding_api_key
 AIRLY_API_KEY=your_airly_api_key

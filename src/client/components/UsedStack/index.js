@@ -11,6 +11,7 @@ const UsedStack = () => (
                 <div className="stack__list-subitem">Context API</div>
                 <div className="stack__list-subitem">Memo</div>
                 <div className="stack__list-subitem">UseEffect</div>
+                <div className="stack__list-subitem">UseReducer</div>
                 <div className="stack__list-subitem">UseState</div>
             </div>
             <div className="stack__list-item">Server Side Rendering</div>

@@ -77642,6 +77642,11 @@ var UsedStack = function UsedStack() {
                 _react2.default.createElement(
                     'div',
                     { className: 'stack__list-subitem' },
+                    'UseReducer'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'stack__list-subitem' },
                     'UseState'
                 )
             ),

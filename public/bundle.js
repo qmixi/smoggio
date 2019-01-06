@@ -82105,9 +82105,11 @@ var GeolocationFetcher = function GeolocationFetcher(_ref) {
 
 
     (0, _react.useEffect)(function () {
-        setLoadingValue(true);
+        if (navigator.geolocation) setLoadingValue(true);
         navigator.geolocation.getCurrentPosition(function (pos) {
             fetchInstallations(pos.coords.latitude, pos.coords.longitude);
+        }, function () {
+            setLoadingValue(false);
         });
     }, []);
 

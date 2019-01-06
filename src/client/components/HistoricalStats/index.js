@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useReducer, memo } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
@@ -6,12 +6,33 @@ import moment from 'moment';
 
 import './styles.scss';
 
-const HistoricalStats = ({ history = [], forecast = [] }) => {
-    const [type, setType] = useState('history');
+const statsReducer = (state, action) => {
+    switch (action.type) {
+        case 'SET_FORECAST':
+            return {
+                type: 'forecast',
+                title: 'Forecast'
+            }
+        case 'SET_HISTORY':
+            return {
+                type: 'history',
+                title: 'Historical'
+            }
+        default:
+            return state
+    }
+};
 
-    const isHistory = type === 'history';
-    const values = isHistory ? history : forecast;
-    const title = isHistory ? 'Historical' : 'Forecast';
+const HistoricalStats = ({ history = [], forecast = [] }) => {
+    const [state, dispatch] = useReducer(
+        statsReducer,
+        {
+            type: 'history',
+            title: 'History'
+        },
+    )
+
+    const values = state.type === 'forecast' ? forecast : history;
     const labels = values.map(item => moment(item.fromDateTime).format('DD MMM HH:mm'));
     const dataValues = values.map(item => item.indexes[0].value);
     const temperatureValues = values.map(item => {
@@ -63,12 +84,19 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
         ]
     };
 
+    const switchStatsType = () => {
+        const newActionType = state.type === 'forecast' ? 'SET_HISTORY' : 'SET_FORECAST';
+
+        dispatch({
+            type: newActionType
+        });
+    }
+
     return (
         <div className="history">
             <div className="history__row">
-                <div className="title history__title title title--small">{title} stats</div>
-                {isHistory && <button className="" onClick={() => setType('forecast')}>Forecast</button>}
-                {!isHistory && <button className="" onClick={() => setType('history')}>History</button>}
+                <div className="title history__title title title--small">{state.title} stats</div>
+                <button onClick={switchStatsType}>{_.startCase(state.type)}</button>
             </div>
 
             <div className="subtitle history__title title title--small">AIRLY CAQI</div>

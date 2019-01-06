@@ -62075,20 +62075,38 @@ __webpack_require__(775);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var statsReducer = function statsReducer(state, action) {
+    switch (action.type) {
+        case 'SET_FORECAST':
+            return {
+                type: 'forecast',
+                title: 'Forecast'
+            };
+        case 'SET_HISTORY':
+            return {
+                type: 'history',
+                title: 'Historical'
+            };
+        default:
+            return state;
+    }
+};
+
 var HistoricalStats = function HistoricalStats(_ref) {
     var _ref$history = _ref.history,
         history = _ref$history === undefined ? [] : _ref$history,
         _ref$forecast = _ref.forecast,
         forecast = _ref$forecast === undefined ? [] : _ref$forecast;
 
-    var _useState = (0, _react.useState)('history'),
-        _useState2 = _slicedToArray(_useState, 2),
-        type = _useState2[0],
-        setType = _useState2[1];
+    var _useReducer = (0, _react.useReducer)(statsReducer, {
+        type: 'history',
+        title: 'History'
+    }),
+        _useReducer2 = _slicedToArray(_useReducer, 2),
+        state = _useReducer2[0],
+        dispatch = _useReducer2[1];
 
-    var isHistory = type === 'history';
-    var values = isHistory ? history : forecast;
-    var title = isHistory ? 'Historical' : 'Forecast';
+    var values = state.type === 'forecast' ? forecast : history;
     var labels = values.map(function (item) {
         return (0, _moment2.default)(item.fromDateTime).format('DD MMM HH:mm');
     });
@@ -62141,6 +62159,14 @@ var HistoricalStats = function HistoricalStats(_ref) {
         }]
     };
 
+    var switchStatsType = function switchStatsType() {
+        var newActionType = state.type === 'forecast' ? 'SET_HISTORY' : 'SET_FORECAST';
+
+        dispatch({
+            type: newActionType
+        });
+    };
+
     return _react2.default.createElement(
         'div',
         { className: 'history' },
@@ -62150,22 +62176,13 @@ var HistoricalStats = function HistoricalStats(_ref) {
             _react2.default.createElement(
                 'div',
                 { className: 'title history__title title title--small' },
-                title,
+                state.title,
                 ' stats'
             ),
-            isHistory && _react2.default.createElement(
+            _react2.default.createElement(
                 'button',
-                { className: '', onClick: function onClick() {
-                        return setType('forecast');
-                    } },
-                'Forecast'
-            ),
-            !isHistory && _react2.default.createElement(
-                'button',
-                { className: '', onClick: function onClick() {
-                        return setType('history');
-                    } },
-                'History'
+                { onClick: switchStatsType },
+                _lodash2.default.startCase(state.type)
             )
         ),
         _react2.default.createElement(

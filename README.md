@@ -10,6 +10,7 @@
   - Memo
   - UseState
   - UseEffect
+  - UseReducer
   
 - MobX
 - Express

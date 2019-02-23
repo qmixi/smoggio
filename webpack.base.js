@@ -14,8 +14,7 @@ module.exports = {
                     plugins: [
                         'transform-decorators-legacy',
                         "transform-class-properties"
-                    ],
-                    presets: ['es2015', 'react', 'stage-2', ['env', { targets: { browsers: 'last 2 versions' } }]]
+                    ]
                 }
             },
             {

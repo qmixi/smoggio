@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import _ from 'lodash';
 
 import './styles.scss';
@@ -10,4 +10,4 @@ const Disconnected = ({ description }) => (
     </div>
 );
 
-export default memo(Disconnected);
+export default Disconnected;

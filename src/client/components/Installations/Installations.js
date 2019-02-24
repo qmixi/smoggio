@@ -16,4 +16,3 @@ const Installations = ({ installations }) => {
 }
 
 export default memo(Installations);
-// export default Installations;

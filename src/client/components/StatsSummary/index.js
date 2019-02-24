@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import cx from 'classnames';
 
 import './styles.scss';
@@ -16,4 +16,4 @@ const InstallationHeader = ({ summary: { value, level, description } = {} }) => 
     </div>
 );
 
-export default memo(InstallationHeader);
+export default InstallationHeader;

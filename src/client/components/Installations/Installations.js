@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import Installation from '../Installation';
 import './styles.scss';
@@ -15,4 +15,4 @@ const Installations = ({ installations }) => {
     )
 }
 
-export default memo(Installations);
+export default Installations;

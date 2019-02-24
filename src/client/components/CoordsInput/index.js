@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState } from 'react';
 
 import './styles.scss';
 

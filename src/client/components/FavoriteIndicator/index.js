@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { withCookies } from 'react-cookie';
 
 import './styles.scss';
@@ -30,4 +30,4 @@ const FavoriteIndicator = ({ cookies, installation }) => {
     )
 }
 
-export default memo(withCookies(FavoriteIndicator));
+export default withCookies(FavoriteIndicator);

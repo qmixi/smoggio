@@ -1,4 +1,4 @@
-import React, { useReducer, memo } from 'react';
+import React, { useReducer } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
@@ -120,4 +120,4 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
     )
 }
 
-export default memo(HistoricalStats);
+export default HistoricalStats;

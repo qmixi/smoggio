@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import _ from 'lodash';
 
 import './styles.scss';
@@ -33,4 +33,4 @@ const LiveStats = ({ values = [] }) => {
 }
 
 
-export default memo(LiveStats);
+export default LiveStats;

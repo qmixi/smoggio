@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 
 import './styles.scss';
 
@@ -17,4 +17,4 @@ const GeolocationFetcher = ({ fetchInstallations, setLoadingValue }) => {
     return <div />
 }
 
-export default memo(GeolocationFetcher);
+export default GeolocationFetcher;

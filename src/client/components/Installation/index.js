@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './styles.scss';
@@ -12,4 +12,4 @@ const Installation = ({ installation: { id, address: { city, street, number } = 
     </Link>
 );
 
-export default memo(Installation);
+export default Installation;

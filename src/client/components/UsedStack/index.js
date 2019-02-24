@@ -9,7 +9,6 @@ const UsedStack = () => (
             <div className="stack__list-item">React 16.7</div>
             <div className="stack__list-sublist">
                 <div className="stack__list-subitem">Context API</div>
-                <div className="stack__list-subitem">Memo</div>
                 <div className="stack__list-subitem">UseEffect</div>
                 <div className="stack__list-subitem">UseReducer</div>
                 <div className="stack__list-subitem">UseState</div>

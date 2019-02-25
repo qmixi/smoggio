@@ -93,19 +93,19 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
     }
 
     return (
-        <div className="history">
-            <div className="history__row">
-                <div className="title history__title title title--small">{state.title} stats</div>
+        <div className="stats">
+            <div className="stats__row">
+                <div className="title stats__title title title--small">{state.title} stats</div>
                 <button onClick={switchStatsType}>{_.startCase(state.type)}</button>
             </div>
 
-            <div className="subtitle history__title title title--small">AIRLY CAQI</div>
-            <div className="history__chart">
+            <div className="subtitle stats__title title title--small">AIRLY CAQI</div>
+            <div className="stats__chart">
                 <Line data={data} legend={legend} />
             </div>
-            {temperatureValues[0] && <div className="history__temperature">
-                <div className="subtitle history__title title title--small history__temperature-title">Temperature</div>
-                <div className="history__chart">
+            {temperatureValues[0] && <div className="stats__temperature">
+                <div className="subtitle stats__title title title--small stats__temperature-title">Temperature</div>
+                <div className="stats__chart">
                     <Bar
                         data={temperatureData}
                         legend={legend}

@@ -408,21 +408,21 @@ button {
       color: #c2c1ca;
       font-size: 14px;
       font-weight: 400; }
-.history {
+.stats {
   margin-top: 20px; }
-  .history__row {
+  .stats__row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end; }
-  .history__chart {
+  .stats__chart {
     max-width: 800px;
     margin-top: 30px; }
-  .history__title {
+  .stats__title {
     margin-top: 30px;
     margin-bottom: 0; }
-  .history__temperature {
+  .stats__temperature {
     margin-top: 30px; }
-    .history__temperature-title {
+    .stats__temperature-title {
       color: #688add; }
 .installation-page__row {
   display: flex;

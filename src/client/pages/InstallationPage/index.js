@@ -11,7 +11,7 @@ import Disconnected from '../../components/Disconnected';
 import StatsSummary from '../../components/StatsSummary';
 import FavoriteIndicator from '../../components/FavoriteIndicator';
 import LiveStats from '../../components/LiveStats';
-import HistoricalStats from '../../components/HistoricalStats';
+import Stats from '../../components/Stats';
 import Loader from '../../components/Loader';
 import './styles.scss';
 
@@ -94,7 +94,7 @@ class InstallationPage extends Component {
                     </div>}
                     {!isDisconnected && <React.Fragment>
                         <LiveStats values={liveValues} />
-                        <HistoricalStats history={historyValues} forecast={forecastValues} />
+                        <Stats history={historyValues} forecast={forecastValues} />
                     </React.Fragment>}
                 </div>}
             </div>

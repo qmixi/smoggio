@@ -4,6 +4,7 @@ import { action } from 'mobx';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import _ from 'lodash';
+import { withCookies } from 'react-cookie';
 
 import InstallationHeader from '../../components/InstallationHeader';
 import Disconnected from '../../components/Disconnected';
@@ -44,6 +45,27 @@ class InstallationPage extends Component {
         );
     }
 
+    setFav = () => {
+        const { installations: { installation: { id } } = {}, cookies } = this.props;
+        const favoriteInstallations = cookies.get('favInstallations') || [];
+        const items = [...favoriteInstallations, id];
+        cookies.set('favInstallations', items, { path: '/' })
+    }
+
+    removeFav = () => {
+        const { installations: { installation: { id } } = {}, cookies } = this.props;
+        const favoriteInstallations = cookies.get('favInstallations');
+        if (favoriteInstallations) {
+            const items = favoriteInstallations.filter(item => item !== id);
+            cookies.set('favInstallations', items, { path: '/' })
+        }
+    }
+
+    isFav = () => {
+        const { installations: { installation: { id } } = {}, cookies } = this.props;
+        const favs = cookies.get('favInstallations');
+        return favs && favs.includes(id);
+    }
 
     render() {
         const { installations: { installation }, stats: { stats, isDisconnected }, match: { params } } = this.props;
@@ -62,7 +84,7 @@ class InstallationPage extends Component {
                         <InstallationHeader installation={installation} />
                         <div className="installation-page__info">
                             <div className="installation-page__indicator">
-                                <FavoriteIndicator installation={installation.id} />
+                                <FavoriteIndicator isFav={this.isFav()} setFav={this.setFav} removeFav={this.removeFav} />
                             </div>
                             {!!summary && !isDisconnected && <StatsSummary summary={summary} />}
                         </div>
@@ -81,7 +103,7 @@ class InstallationPage extends Component {
 }
 
 export default {
-    component: withRouter(InstallationPage),
+    component: withCookies(withRouter(InstallationPage)),
     loadData: (state, params) => {
         return {
             promise: Promise.all([

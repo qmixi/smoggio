@@ -10,11 +10,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: '/node_modules/',
                 query: {
-                    cacheDirectory: true,
-                    plugins: [
-                        'transform-decorators-legacy',
-                        "transform-class-properties"
-                    ]
+                    cacheDirectory: true,                    
                 }
             },
             {

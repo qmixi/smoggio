@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import './styles.scss';
 
-const InstallationHeader = ({ summary: { value, level, description } = {} }) => (
+const StatsSummary = ({ summary: { value, level, description } = {} }) => (
     <div className={cx('summary', {
         'summary--low': ['LOW', 'VERY_LOW'].includes(level),
         'summary--medium': level === 'MEDIUM',
@@ -16,4 +16,4 @@ const InstallationHeader = ({ summary: { value, level, description } = {} }) => 
     </div>
 );
 
-export default InstallationHeader;
+export default StatsSummary;

@@ -1,8 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 
-import './styles.scss';
-
 const InstallationHeader = (props) => {
     const city = _.get(props, 'installation.address.city', '');
     const street = _.get(props, 'installation.address.street', '');
@@ -11,9 +9,9 @@ const InstallationHeader = (props) => {
     const name = _.get(props, 'installation.sponsor.name', '');
 
     return (
-        <div>
-            <div className="title">{city}, {street} {number}</div>
-            <div className="subtitle">
+        <div className="installation-header">
+            <div className="installation-header__title">{city}, {street} {number}</div>
+            <div className="installation-header__subtitle">
                 {!!description && <span>{description}:</span>} {name}
             </div>
         </div>

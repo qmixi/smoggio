@@ -10,9 +10,7 @@ const StatsSummary = ({ summary: { value, level, description } = {} }) => (
         'summary--high': level === 'HIGH'
     })}>
         <div className="summary__value">{parseInt(value, 10)}</div>
-        <div className="summary__description">
-            <span>{description}&nbsp;</span>
-        </div>
+        <div className="summary__description">{description}</div>
     </div>
 );
 

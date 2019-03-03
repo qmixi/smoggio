@@ -10,8 +10,8 @@ const InstallationHeader = (props) => {
 
     return (
         <div className="installation-header">
-            <div className="installation-header__title">{city}, {street} {number}</div>
-            <div className="installation-header__subtitle">
+            <div className="installation-header__title title">{city}, {street} {number}</div>
+            <div className="installation-header__subtitle subtitle">
                 {!!description && <span>{description}:</span>} {name}
             </div>
         </div>

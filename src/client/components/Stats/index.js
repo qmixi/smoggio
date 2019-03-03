@@ -3,32 +3,15 @@ import { Line, Bar } from 'react-chartjs-2';
 import _ from 'lodash';
 import moment from 'moment';
 
-
+import statsReducer from './statsReducer.js'
 import './styles.scss';
-
-const statsReducer = (state, action) => {
-    switch (action.type) {
-        case 'SET_FORECAST':
-            return {
-                type: 'forecast',
-                title: 'Forecast'
-            }
-        case 'SET_HISTORY':
-            return {
-                type: 'history',
-                title: 'Historical'
-            }
-        default:
-            return state
-    }
-};
 
 const HistoricalStats = ({ history = [], forecast = [] }) => {
     const [state, dispatch] = useReducer(
         statsReducer,
         {
             type: 'history',
-            title: 'History'
+            title: 'Historical'
         },
     )
 
@@ -92,11 +75,16 @@ const HistoricalStats = ({ history = [], forecast = [] }) => {
         });
     }
 
+    const getButtonLabel = () => {
+        const label = state.type === 'forecast' ? 'history' : 'forecast';
+        return _.startCase(label)
+    }
+
     return (
         <div className="stats">
             <div className="stats__row">
                 <div className="title stats__title title title--small">{state.title} stats</div>
-                <button onClick={switchStatsType}>{_.startCase(state.type)}</button>
+                <button className="stats__button" onClick={switchStatsType}>{getButtonLabel()}</button>
             </div>
 
             <div className="subtitle stats__title title title--small">AIRLY CAQI</div>

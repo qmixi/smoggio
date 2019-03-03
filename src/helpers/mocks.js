@@ -96,7 +96,7 @@ export const installations = [
 ];
 
 
-const stats = {
+export const stats = {
     current: {
         fromDateTime: '2019-02-26T18:20:06.630Z',
         tillDateTime: '2019-02-26T19:20:06.630Z',

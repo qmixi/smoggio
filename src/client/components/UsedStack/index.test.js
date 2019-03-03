@@ -8,3 +8,8 @@ it('shows a Stack indicator', () => {
     expect(stack.find('.stack').length).toEqual(1);
 });
 
+it('displays proper react version', () => {
+    const stack = shallow(<Stack />);
+    expect(stack.find('.stack__list-item').first().text()).toEqual(`React ${React.version}`);
+});
+

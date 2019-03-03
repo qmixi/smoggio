@@ -6,7 +6,7 @@ const UsedStack = () => (
     <div className="stack">
         <div className="title stack__title">Stack used to create Smoggio app</div>
         <div className="stack__list">
-            <div className="stack__list-item">React 16.7</div>
+            <div className="stack__list-item">React {React.version}</div>
             <div className="stack__list-sublist">
                 <div className="stack__list-subitem">Context API</div>
                 <div className="stack__list-subitem">UseEffect</div>

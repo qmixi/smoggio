@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
-import { action } from 'mobx';
 import _ from 'lodash';
 import { withCookies } from 'react-cookie';
 
@@ -19,7 +18,7 @@ class Favourites extends Component {
 
     componentDidMount() {
         const { cookies, installations } = this.props;
-        const favs = cookies.get('favInstallations') || [];        
+        const favs = cookies.get('favInstallations') || [];
         Promise.all(
             favs.map(installation => installations.fetchInstallation(installation))
         ).then(data => {

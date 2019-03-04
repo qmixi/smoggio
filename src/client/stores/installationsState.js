@@ -11,11 +11,11 @@ export default class InstallationsState {
     @observable isLoading = false;
 
     constructor(initialState) {
-        this.installations = _.get(initialState, 'installations.installations', []);
-        this.installation = _.get(initialState, 'installations.installation', {});
-        this.favs = _.get(initialState, 'installations.favs', []);
+        this.setInstallations(_.get(initialState, 'installations.installations', []));
+        this.setActiveInstallation(_.get(initialState, 'installations.installation', {}));
+        this.setFavInstallations(_.get(initialState, 'installations.favs', []));
     }
-    
+
     @action
     fetchInstallations(lat, lng) {
         return fetch(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxDistanceKM=5&maxResults=10`, { headers: getHeader() })
@@ -25,11 +25,30 @@ export default class InstallationsState {
     }
 
     @action
+    setInstallations = (installations) => {
+        this.installations = installations;
+    }
+
+    @action
+    setActiveInstallation = (installation) => {
+        this.installation = installation;
+    }
+
+    @action
+    setFavInstallations = (installations) => {
+        this.favs = installations;
+    }
+
+    @action
+    setLoadingValue = (value) => {
+        this.isLoading = value;
+    }
+
+    @action
     fetchInstallation(id) {
         return fetch(`https://airapi.airly.eu/v2/installations/${id}`, { headers: getHeader() })
             .then(resp => resp.json())
             .catch(e => console.log(e));
-
     }
 
     @action

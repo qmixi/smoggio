@@ -19,7 +19,8 @@ class Home extends Component {
     }
 
     fetchCoords = address => {
-        this.setLoadingValue(true);
+        const { installations: { setLoadingValue } } = this.props;
+        setLoadingValue(true)
         this.props.installations.fetchGeocodingData(address)
             .then(data => {
                 const coords = _.get(data, 'results[0].geometry.location', {})
@@ -32,24 +33,19 @@ class Home extends Component {
     }
 
     fetchInstallations = (lat, lng) => {
-        const { installations: { fetchInstallations } } = this.props;
+        const { installations: { fetchInstallations, setLoadingValue, setInstallations } } = this.props;
         fetchInstallations(lat, lng)
             .then(data => {
-                this.setLoadingValue(false);
-                this.props.installations.installations = data;
+                setLoadingValue(false);
+                setInstallations(data);
             })
             .catch(() => {
-                this.setLoadingValue(false);
+                setLoadingValue(false);
             });
     }
 
-    setLoadingValue = value => {        
-        const { installations } = this.props;
-        installations.isLoading = value;
-    }
-
     render() {
-        const { installations: { installations, isLoading } } = this.props;        
+        const { installations: { installations, isLoading, setLoadingValue } } = this.props;
         return (
             <div className="home-page">
                 <div className="title home-page__title">Welcome to Smoggio!</div>
@@ -57,7 +53,7 @@ class Home extends Component {
                 <div className="home-page__coords-input">
                     <CoordsInput fetchCoords={this.fetchCoords} />
                 </div>
-                {_.isEmpty(installations) && <GeolocationFetcher fetchInstallations={this.fetchInstallations} setLoadingValue={this.setLoadingValue} />}
+                {_.isEmpty(installations) && <GeolocationFetcher fetchInstallations={this.fetchInstallations} setLoadingValue={setLoadingValue} />}
                 {/* <Suspense fallback={<div>...Loading</div>}> */}
                 {isLoading ? <Loader /> : <Installations installations={installations} />}
                 {/* </Suspense> */}

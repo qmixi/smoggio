@@ -24,12 +24,12 @@ class InstallationPage extends Component {
         const { installations, stats, match: { params } } = this.props;
         stats.fetchStats(params.id)
             .then(data => {
-                stats.stats = data
+                stats.setStats(data);
             })
             .catch(console.log)
         installations.fetchInstallation(params.id)
             .then(data => {
-                installations.installation = data
+                installations.setActiveInstallation(data)
             })
             .catch(console.log)
 
@@ -111,8 +111,8 @@ export default {
                 state.installations.fetchInstallation(params.id)
             ]),
             callback: data => {
-                state.stats.stats = data[0];
-                state.installations.installation = data[1];
+                state.stats.setStats(data[0]);
+                state.installations.setActiveInstallation(data[1]);
             }
         }
     }

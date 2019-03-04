@@ -22,23 +22,8 @@ class Favourites extends Component {
         Promise.all(
             favs.map(installation => installations.fetchInstallation(installation))
         ).then(data => {
-            installations.favs = data;
+            installations.setFavInstallations(data);
         });
-    }
-
-    fetchCoords = address => {
-        this.props.installations.fetchGeocodingData(address)
-            .then(data => {
-                const coords = _.get(data, 'results[0].geometry.location', {})
-                const { lat, lng } = coords;
-                if (lat && lng) {
-                    this.props.installations.fetchInstallations(lat, lng)
-                        .then(data => {
-                            this.props.installations.installations = data;
-                        });
-                }
-            })
-            .catch(console.log)
     }
 
     render() {
@@ -62,7 +47,7 @@ export default {
                 favs.map(installation => state.installations.fetchInstallation(installation))
             ),
             callback: data => {
-                state.installations.favs = data;
+                state.installations.setFavInstallations(data);
             }
         }
     }

@@ -60,9 +60,9 @@ export default class InstallationsState {
 
     toJson() {
         return {
-            installations: this.installations ? this.installations : [],
-            installation: this.installation ? this.installation : {},
-            favs: this.favs ? this.favs : {}
+            installations: _.get(this, 'installations', []),
+            installation: _.get(this, 'installation', {}),
+            favs: _.get(this, 'favs', {})
         };
     }
 }

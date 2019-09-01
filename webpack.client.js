@@ -1,6 +1,8 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.js')
+var webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
     // tell webpack which is the root file of client app
@@ -13,7 +15,16 @@ const config = {
     },
     node: {
         fs: 'empty'
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+        "process.env": {
+            GEOCODING_API_KEY: process.env.GEOCODING_API_KEY,
+            AIRLY_API_KEY: process.env.AIRLY_API_KEY,
+        }
+        }),
+        new ExtractTextPlugin("styles.css")
+    ]
 }
 
 module.exports = merge(baseConfig, config);

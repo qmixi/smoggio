@@ -1,4 +1,6 @@
 **/node_modules
-build/styles.css
+build
 .env
+.vscode
 coverage
+public

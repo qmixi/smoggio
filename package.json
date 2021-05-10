@@ -39,7 +39,7 @@
         "express-http-proxy": "1.0.6",
         "isomorphic-fetch": "^2.2.1",
         "jest": "^24.1.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.21",
         "mobx": "^5.8.0",
         "mobx-react": "^5.4.3",
         "nodemon": "1.12.0",

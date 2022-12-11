@@ -35,7 +35,7 @@
         "dotenv-webpack": "^1.5.7",
         "enzyme": "^3.9.0",
         "enzyme-adapter-react-16": "^1.9.1",
-        "express": "4.15.4",
+        "express": "4.17.3",
         "express-http-proxy": "1.0.6",
         "isomorphic-fetch": "^2.2.1",
         "jest": "^24.1.0",
